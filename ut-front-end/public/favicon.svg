@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Background Circle -->
+  <circle cx="32" cy="32" r="30" fill="#FF6B35" stroke="#FFFFFF" stroke-width="2"/>
+  
+  <!-- White inner circle -->
+  <circle cx="32" cy="32" r="24" fill="#FFFFFF"/>
+  
+  <!-- Orange center circle -->
+  <circle cx="32" cy="32" r="20" fill="#FF6B35"/>
+  
+  <!-- Text "UT" -->
+  <text x="32" y="40" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#FFFFFF">UT</text>
+</svg>
