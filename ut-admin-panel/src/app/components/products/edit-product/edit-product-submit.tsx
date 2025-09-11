@@ -4,7 +4,7 @@ import useProductSubmit from "@/hooks/useProductSubmit";
 import ErrorMsg from "../../common/error-msg";
 import FormField from "../form-field";
 import DescriptionTextarea from "../add-product/description-textarea";
-import { useGetProductQuery } from "@/redux/product/productApi";
+import { useGetSingleProductQuery } from "@/redux/product/productApi";
 import OfferDatePicker from "../add-product/offer-date-picker";
 import ProductTypeBrand from "../add-product/product-type-brand";
 import AdditionalInformation from "../add-product/additional-information";
@@ -14,7 +14,7 @@ import Tags from "../add-product/tags";
 import ProductCategory from "../../category/product-category";
 
 const EditProductSubmit = ({ id }: { id: string }) => {
-  const { data: product, isError, isLoading } = useGetProductQuery(id);
+  const { data: product, isError, isLoading } = useGetSingleProductQuery(id);
   const {
     handleSubmit,
     handleSubmitProduct,

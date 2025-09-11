@@ -3,7 +3,7 @@ const { ObjectId } = mongoose.Schema.Types;
 // schema design
 const validator = require("validator");
 
-const productsSchema = mongoose.Schema({
+const foodItemSchema = mongoose.Schema({
   sku: {
     type: String,
     required: false,
@@ -13,9 +13,9 @@ const productsSchema = mongoose.Schema({
     required: true,
     validate: [validator.isURL, "Please provide valid url(s)"]
   },
-  title: {
+  name: {
     type: String,
-    required: [true, "Please provide a name for this product."],
+    required: [true, "Please provide a name for this food item."],
     trim: true,
     minLength: [3, "Name must be at least 3 characters."],
     maxLength: [200, "Name is too large"],
@@ -28,26 +28,14 @@ const productsSchema = mongoose.Schema({
   unit: {
     type: String,
     required: true,
+    default: "plate"
   },
   imageURLs: [{
-    color:{
-      name:{
-        type: String,
-        required: false,
-        trim: true,
-      },
-      clrCode:{
-        type: String,
-        required: false,
-        trim: true,
-      }
-    },
     img:{
       type: String,
       required: false,
       validate: [validator.isURL, "Please provide valid url(s)"]
-    },
-    sizes:[String]
+    }
   }],
   parent:{
     type:String,
@@ -62,18 +50,19 @@ const productsSchema = mongoose.Schema({
   price: {
     type: Number,
     required: true,
-    min: [0, "Product price can't be negative"]
+    min: [0, "Food item price can't be negative"]
   },
   discount: {
     type: Number,
-    min: [0, "Product price can't be negative"]
+    min: [0, "Discount can't be negative"],
+    default: 0
   },
   quantity: {
     type: Number,
     required: true,
-    min: [0, "Product quantity can't be negative"]
+    min: [0, "Food item quantity can't be negative"]
   },
-  brand: {
+  restaurant: {
     name: {
       type: String,
       required: true,
@@ -99,16 +88,17 @@ const productsSchema = mongoose.Schema({
     type: String,
     required: true,
     enum: {
-      values: ["in-stock", "out-of-stock", "discontinued"],
+      values: ["available", "unavailable", "discontinued"],
       message: "status can't be {VALUE} "
     },
-    default: "in-stock",
+    default: "available",
   },
   reviews: [{type:ObjectId, ref: 'Reviews' }],
-  productType:{
+  foodType:{
     type:String,
     required: true,
     lowercase: true,
+    enum: ["veg", "non-veg", "vegan", "jain"]
   },
   description: {
     type: String,
@@ -118,9 +108,30 @@ const productsSchema = mongoose.Schema({
     type: String,
     required: false
   },
-  additionalInformation: [{}],
+  ingredients: [String],
+  nutritionalInfo: {
+    calories: Number,
+    protein: Number,
+    carbs: Number,
+    fat: Number,
+    fiber: Number
+  },
+  allergens: [String],
+  spiceLevel: {
+    type: String,
+    enum: ["mild", "medium", "spicy", "extra-spicy"],
+    default: "mild"
+  },
+  preparationTime: {
+    type: Number,
+    required: true,
+    min: [5, "Preparation time must be at least 5 minutes"]
+  },
   tags: [String],
-  sizes: [String],
+  thaliType: {
+    type: String,
+    enum: ["mini", "regular", "large", "family"]
+  },
   offerDate:{
     startDate:{
       type:Date
@@ -143,6 +154,6 @@ const productsSchema = mongoose.Schema({
 })
 
 
-const Products = mongoose.model('Products', productsSchema)
+const FoodItem = mongoose.model('FoodItem', foodItemSchema)
 
-module.exports = Products;
+module.exports = FoodItem;

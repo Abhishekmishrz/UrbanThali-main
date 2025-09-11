@@ -24,7 +24,7 @@ type ICategory = {
   id: string;
 };
 
-type status = "in-stock" | "out-of-stock" | "discontinued";
+type status = "available" | "unavailable" | "discontinued";
 
 const useProductSubmit = () => {
   const [sku, setSku] = useState<string>("");
@@ -40,7 +40,7 @@ const useProductSubmit = () => {
   const [quantity, setQuantity] = useState<number>(0);
   const [brand, setBrand] = useState<IBrand>({ name: "", id: "" });
   const [category, setCategory] = useState<ICategory>({ name: "", id: "" });
-  const [status, setStatus] = useState<status>("in-stock");
+  const [status, setStatus] = useState<status>("available");
   const [productType, setProductType] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [videoId, setVideoId] = useState<string>("");
@@ -94,7 +94,7 @@ const useProductSubmit = () => {
     setQuantity(0);
     setBrand({ name: "", id: "" });
     setCategory({ name: "", id: "" });
-    setStatus("in-stock");
+    setStatus("available");
     setProductType("");
     setDescription("");
     setVideoId("");
@@ -110,31 +110,46 @@ const useProductSubmit = () => {
 
   // handle submit product
   const handleSubmitProduct = async (data: any) => {
-    // console.log("product data--->", data);
+    console.log("product data--->", data);
 
-    // product data
+    // Ensure brand is set - use first available brand as default if none selected
+    let selectedBrand = brand;
+    if (!brand.name || !brand.id) {
+      // Set default brand - Urban Kitchen from the API response
+      selectedBrand = {
+        name: "Urban Kitchen",
+        id: "68c1e077e3a8f3a04982b617"
+      };
+    }
+
+    // Food item data - mapped to backend schema
     const productData = {
       sku: data.SKU,
       img: img,
-      title: data.title,
-      slug: slugify(data.title, { replacement: "-", lower: true }),
-      unit: data.unit,
+      name: data["Add-on_Name"] || data["Dish_Name"] || data.title || data.name, // Handle multiple possible field names
+      slug: slugify(data["Add-on_Name"] || data["Dish_Name"] || data.title || data.name || "item", { replacement: "-", lower: true }),
+      unit: data.unit || "piece",
       imageURLs: imageURLs,
-      parent: parent,
-      children: children,
-      price: data.price,
-      discount: data.discount_percentage,
-      quantity: data.quantity,
-      brand: brand,
+      parent: parent || "Thali",
+      children: children || "Main Course",
+      price: Number(data.price),
+      discount: Number(data["discount_percentage"]) || 0,
+      quantity: Number(data.quantity),
+      restaurant: selectedBrand, // Backend expects 'restaurant' not 'brand'
       category: category,
       status: status,
       offerDate: {
         startDate: offerDate.startDate,
         endDate: offerDate.endDate,
       },
-      productType: productType,
+      foodType: productType && ["veg", "non-veg", "vegan", "jain"].includes(productType) ? productType : "veg", // Valid enum values only
       description: data.description,
       videoId: data.youtube_video_Id,
+      ingredients: data.ingredients ? data.ingredients.split(",").map((i: string) => i.trim()) : [],
+      preparationTime: Number(data.preparationTime) || Number(data["Preparation_Time_(mins)"]) || 5,
+      spiceLevel: data.spiceLevel || "mild",
+      thaliType: data.thaliType,
+      featured: data.featured || false,
       additionalInformation: additionalInformation,
       tags: tags,
     };
@@ -153,14 +168,17 @@ const useProductSubmit = () => {
     } else {
       const res = await addProduct(productData);
       if ("error" in res) {
+        console.log("Add product error:", res.error);
         if ("data" in res.error) {
           const errorData = res.error.data as { message?: string };
           if (typeof errorData.message === "string") {
             return notifyError(errorData.message);
           }
         }
+        // Fallback error message
+        return notifyError("Failed to add food item. Please check all required fields.");
       } else {
-        notifySuccess("Product created successFully");
+        notifySuccess("Food item created successfully!");
         setIsSubmitted(true);
         resetForm();
         router.push('/product-grid')
@@ -169,29 +187,48 @@ const useProductSubmit = () => {
   };
   // handle edit product
   const handleEditProduct = async (data: any, id: string) => {
+    console.log("=== EDIT FORM SUBMISSION DEBUG ===");
+    console.log("Edit form data--->", data);
+    console.log("Form errors--->", errors);
+    
+    // Ensure brand is set - use first available brand as default if none selected
+    let selectedBrand = brand;
+    if (!brand.name || !brand.id) {
+      // Set default brand - Urban Kitchen from the API response
+      selectedBrand = {
+        name: "Urban Kitchen",
+        id: "68c1e077e3a8f3a04982b617"
+      };
+    }
+    
     // product data
     const productData = {
       sku: data.SKU,
       img: img,
-      title: data.title,
-      slug: slugify(data.title, { replacement: "-", lower: true }),
-      unit: data.unit,
+      name: data["Dish_Name"] || data.title || data.name, // Handle multiple field names
+      slug: slugify(data["Dish_Name"] || data.title || data.name || "item", { replacement: "-", lower: true }),
+      unit: data.unit || "piece",
       imageURLs: imageURLs,
-      parent: parent,
-      children: children,
-      price: data.price,
-      discount: data.discount_percentage,
-      quantity: data.quantity,
-      brand: brand,
+      parent: parent || "Thali",
+      children: children || "Main Course",
+      price: Number(data.price),
+      discount: Number(data["discount_percentage"]) || 0,
+      quantity: Number(data.quantity),
+      restaurant: selectedBrand, // Backend expects 'restaurant' not 'brand'
       category: category,
       status: status,
       offerDate: {
         startDate: offerDate.startDate,
         endDate: offerDate.endDate,
       },
-      productType: productType,
+      foodType: productType && ["veg", "non-veg", "vegan", "jain"].includes(productType) ? productType : "veg", // Valid enum values only
       description: data.description,
       videoId: data.youtube_video_Id,
+      ingredients: data.ingredients ? data.ingredients.split(",").map((i: string) => i.trim()) : [],
+      preparationTime: Number(data.preparationTime) || Number(data["Preparation_Time_(mins)"]) || 5,
+      spiceLevel: data.spiceLevel || "mild",
+      thaliType: data.thaliType,
+      featured: data.featured || false,
       additionalInformation: additionalInformation,
       tags: tags,
     };

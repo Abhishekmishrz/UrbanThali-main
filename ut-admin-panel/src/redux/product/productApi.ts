@@ -18,7 +18,7 @@ export const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // getUserOrders
     getAllProducts: builder.query<ProductResponse, void>({
-      query: () => `/api/product/all`,
+      query: () => `/api/food-item/all`,
       providesTags: ["AllProducts"],
       keepUnusedDataFor: 600,
     }),
@@ -26,7 +26,7 @@ export const authApi = apiSlice.injectEndpoints({
     addProduct: builder.mutation<IProductResponse, IAddProduct>({
       query(data: IAddProduct) {
         return {
-          url: `/api/product/add`,
+          url: `/api/food-item/add`,
           method: "POST",
           body: data,
         };
@@ -40,7 +40,7 @@ export const authApi = apiSlice.injectEndpoints({
     >({
       query({ id, data }) {
         return {
-          url: `/api/product/edit-product/${id}`,
+          url: `/api/food-item/edit-food-item/${id}`,
           method: "PATCH",
           body: data,
         };
@@ -49,23 +49,23 @@ export const authApi = apiSlice.injectEndpoints({
     }),
     // get single product
     getProduct: builder.query<IAddProduct, string>({
-      query: (id) => `/api/product/single-product/${id}`,
+      query: (id) => `/api/food-item/single-food-item/${id}`,
     }),
     // get single product
     getReviewProducts: builder.query<IReviewProductRes, void>({
-      query: () => `/api/product/review-product`,
+      query: () => `/api/food-item/review-food-item`,
       providesTags: ["ReviewProducts"]
     }),
     // get single product
     getStockOutProducts: builder.query<IReviewProductRes, void>({
-      query: () => `/api/product/stock-out`,
+      query: () => `/api/food-item/stock-out`,
       providesTags: ["StockOutProducts"]
     }),
      // delete category
      deleteProduct: builder.mutation<{message:string}, string>({
       query(id: string) {
         return {
-          url: `/api/product/${id}`,
+          url: `/api/food-item/${id}`,
           method: "DELETE",
         };
       },

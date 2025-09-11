@@ -1,33 +1,33 @@
 const express = require('express');
 const router = express.Router();
 // internal
-const productController = require('../controller/product.controller');
+const foodItemController = require('../controller/foodItem.controller');
 
-// add a product
-router.post('/add', productController.addProduct);
-// add all product
-router.post('/add-all', productController.addAllProducts);
-// get all products
-router.get('/all', productController.getAllProducts);
-// get offer timer product
-router.get('/offer', productController.getOfferTimerProducts);
-// top rated products
-router.get('/top-rated', productController.getTopRatedProducts);
-// reviews products
-router.get('/review-product', productController.reviewProducts);
-// get popular products by type
-router.get('/popular/:type', productController.getPopularProductByType);
-// get Related Products
-router.get('/related-product/:id', productController.getRelatedProducts);
-// get Single Product
-router.get("/single-product/:id", productController.getSingleProduct);
-// stock Product
-router.get("/stock-out", productController.stockOutProducts);
-// get Single Product
-router.patch("/edit-product/:id", productController.updateProduct);
-// get Products ByType
-router.get('/:type', productController.getProductsByType);
-// get Products ByType 
-router.delete('/:id', productController.deleteProduct);
+// add a food item
+router.post('/add', foodItemController.addFoodItem);
+// add all food items
+router.post('/add-all', foodItemController.addAllFoodItems);
+// get all food items
+router.get('/all', foodItemController.getAllFoodItems);
+// get offer timer food items
+router.get('/offer', foodItemController.getOfferTimerFoodItems);
+// top rated food items
+router.get('/top-rated', foodItemController.getTopRatedFoodItems);
+// reviews food items
+router.get('/review-food-item', foodItemController.reviewFoodItems);
+// get popular food items by type
+router.get('/popular/:type', foodItemController.getPopularFoodItemByType);
+// get Related Food Items
+router.get('/related-food-item/:id', foodItemController.getRelatedFoodItems);
+// get Single Food Item
+router.get("/single-food-item/:id", foodItemController.getSingleFoodItem);
+// unavailable Food Items
+router.get("/unavailable", foodItemController.unavailableFoodItems);
+// update Single Food Item
+router.patch("/edit-food-item/:id", foodItemController.updateFoodItem);
+// get Food Items By Type
+router.get('/:type', foodItemController.getFoodItemsByType);
+// delete Food Item
+router.delete('/:id', foodItemController.deleteFoodItem);
 
 module.exports = router;
