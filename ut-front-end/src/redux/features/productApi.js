@@ -4,28 +4,28 @@ export const productApi = apiSlice.injectEndpoints({
   overrideExisting: true,
   endpoints: (builder) => ({
     getAllProducts: builder.query({
-      query: () => `/api/product/all`,
+      query: () => `/api/food-item/all`,
       providesTags:['Products']
     }),
     getProductType: builder.query({
-      query: ({ type, query }) => `/api/product/${type}?${query}`,
+      query: ({ type, query }) => `/api/food-item/${type}?${query}`,
       providesTags:['ProductType']
     }),
     getOfferProducts: builder.query({
-      query: (type) => `/api/product/offer?type=${type}`,
+      query: (type) => `/api/food-item/offer?type=${type}`,
       providesTags:['OfferProducts']
     }),
     getPopularProductByType: builder.query({
-      query: (type) => `/api/product/popular/${type}`,
+      query: (type) => `/api/food-item/popular/${type}`,
       providesTags:['PopularProducts']
     }),
     getTopRatedProducts: builder.query({
-      query: () => `/api/product/top-rated`,
+      query: () => `/api/food-item/top-rated`,
       providesTags:['TopRatedProducts']
     }),
     // get single product
     getProduct: builder.query({
-      query: (id) => `/api/product/single-product/${id}`,
+      query: (id) => `/api/food-item/single-food-item/${id}`,
       providesTags: (result, error, arg) => [{ type: "Product", id: arg }],
       invalidatesTags: (result, error, arg) => [
         { type: "RelatedProducts", id:arg },
@@ -33,7 +33,7 @@ export const productApi = apiSlice.injectEndpoints({
     }),
     // get related products
     getRelatedProducts: builder.query({
-      query: (id) => `/api/product/related-product/${id}`,
+      query: (id) => `/api/food-item/related-food-item/${id}`,
       providesTags: (result, error, arg) => [
         { type: "RelatedProducts", id: arg },
       ],

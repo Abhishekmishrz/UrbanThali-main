@@ -1,19 +1,57 @@
 'use client';
-import React, { useState } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { add_cart_product } from "@/redux/features/cartSlice";
+import { useGetAllProductsQuery } from "@/redux/features/productApi";
 
 const MenuFilterArea = () => {
   const [activeFilter, setActiveFilter] = useState('thali');
+  const [isMobile, setIsMobile] = useState(false);
   const dispatch = useDispatch();
   const { cart_products } = useSelector((state) => state.cart);
+  
+  // Fetch all products from backend
+  const { data: allProductsData, error, isLoading } = useGetAllProductsQuery();
 
-  // Sample data for all menu items
-  const allMenuItems = [
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    
+    return () => window.removeEventListener('resize', checkIfMobile);
+  }, []);
+
+  // Process backend data to get thali and addon items
+  const allMenuItems = useMemo(() => {
+    if (!allProductsData?.data) return [];
+    
+    return allProductsData.data.map(product => ({
+      id: product._id,
+      title: product.name || product.title,
+      subtitle: product.thaliType || product.category?.name || 'Food',
+      rating: 4.5, // Default rating, can be calculated from reviews
+      prepTime: `${product.preparationTime || 25} min`,
+      servings: `${product.unit === 'plate' ? '1-2' : '2-3'} servings`,
+      price: `₹${product.price}`,
+      image: product.img,
+      description: product.description,
+      category: product.category?.name?.toLowerCase().includes('thali') || product.thaliType ? 'thali' : 
+                (product.category?.name?.toLowerCase() === 'add-ons' || 
+                 product.productType?.startsWith('addon-') ||
+                 product.category?.parent?.toLowerCase() === 'add-ons') ? 'addons' : 'thali',
+      cuisine: product.cuisine || "Indian, Traditional"
+    }));
+  }, [allProductsData]);
+
+  // Fallback static data if backend is not available
+  const fallbackMenuItems = [
     // Thali items
     {
-      id: 1,
+      id: "thali-1",
       title: "Mini Urban Thali",
       subtitle: "Mini",
       rating: 4.5,
@@ -215,11 +253,14 @@ const MenuFilterArea = () => {
     return item.category === activeFilter;
   });
 
-  // Get thali items
-  const thaliItems = allMenuItems.filter(item => item.category === 'thali');
+  // Use backend data if available, otherwise fallback to static data
+  const displayMenuItems = allMenuItems.length > 0 ? allMenuItems : fallbackMenuItems;
   
-  // Get add-ons items
-  const addonsItems = allMenuItems.filter(item => item.category === 'addons');
+  // Get thali items
+  const thaliItems = displayMenuItems.filter(item => item.category === 'thali');
+  
+  // Get add-ons items  
+  const addonsItems = displayMenuItems.filter(item => item.category === 'addons');
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
@@ -241,7 +282,8 @@ const MenuFilterArea = () => {
       quantity: 100, // Set a high quantity for availability
       img: item.image, // Changed from 'image' to 'img' to match cart component expectations
       category: item.category,
-      description: item.description
+      description: item.description,
+      orderQuantity: 1 // Default order quantity
     };
     
     dispatch(add_cart_product(cartItem));
@@ -403,20 +445,75 @@ const MenuFilterArea = () => {
 
   return (
     <section id="menu-section" className="tp-product-area">
-      <div className="container-fluid" style={{ paddingLeft: '20px', paddingRight: '20px', overflow: 'hidden', backgroundColor: '#FFF9E6', borderRadius: '12px', padding: '30px 20px' }}>
+      <div className="container-fluid" style={{ 
+        paddingLeft: isMobile ? '15px' : '20px', 
+        paddingRight: isMobile ? '15px' : '20px', 
+        overflow: 'hidden', 
+        backgroundColor: '#FFF9E6', 
+        borderRadius: '12px', 
+        padding: isMobile ? '25px 15px' : '30px 20px' 
+      }}>
         {/* Header Section */}
         <div className="row" style={{marginLeft: '0', marginRight: '0'}}>
           <div className="col-xl-12" style={{paddingLeft: '0', paddingRight: '0'}}>
-            <div className="tp-section-title-wrapper-3 mb-20 text-center" style={{paddingLeft: '20px', paddingRight: '20px'}}>
-              <h3 className="tp-section-title-3" style={{fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '4px'}}>
+            <div className="tp-section-title-wrapper-3 mb-20 text-center" style={{
+              paddingLeft: isMobile ? '10px' : '20px', 
+              paddingRight: isMobile ? '10px' : '20px'
+            }}>
+              <h3 className="tp-section-title-3" style={{
+                fontSize: isMobile ? '2rem' : '2.5rem', 
+                fontWeight: 'bold', 
+                marginBottom: '4px'
+              }}>
                 Discover Our Full Menu
               </h3>
-              <p style={{fontSize: '16px', color: '#666', maxWidth: '600px', margin: '0 auto'}}>
+              <p style={{
+                fontSize: isMobile ? '14px' : '16px', 
+                color: '#666', 
+                maxWidth: '600px', 
+                margin: '0 auto',
+                paddingLeft: isMobile ? '10px' : '0',
+                paddingRight: isMobile ? '10px' : '0'
+              }}>
                 Indulge in traditional thalis, paired with irresistible add-ons.
               </p>
             </div>
           </div>
         </div>
+        
+        {/* Loading State */}
+        {isLoading && (
+          <div className="row" style={{ 
+            marginLeft: '0', 
+            marginRight: '0', 
+            textAlign: 'center', 
+            padding: isMobile ? '30px' : '40px' 
+          }}>
+            <div style={{ 
+              fontSize: isMobile ? '16px' : '18px', 
+              color: '#666' 
+            }}>
+              Loading delicious menu items...
+            </div>
+          </div>
+        )}
+        
+        {/* Error State */}
+        {error && (
+          <div className="row" style={{ 
+            marginLeft: '0', 
+            marginRight: '0', 
+            textAlign: 'center', 
+            padding: isMobile ? '30px' : '40px' 
+          }}>
+            <div style={{ 
+              color: '#ef4444',
+              fontSize: isMobile ? '14px' : '16px'
+            }}>
+              Unable to load menu items. Using sample menu.
+            </div>
+          </div>
+        )}
 
         {/* Filter Buttons */}
         <div className="row mb-30">
@@ -428,14 +525,14 @@ const MenuFilterArea = () => {
                 style={{
                   backgroundColor: activeFilter === 'thali' ? '#FCB53B' : 'white',
                   color: activeFilter === 'thali' ? 'white' : '#6b7280',
-                  padding: '8px 24px',
+                  padding: isMobile ? '10px 20px' : '8px 24px',
                   borderRadius: '8px',
                   border: '2px solid #e5e7eb',
-                  fontSize: '16px',
+                  fontSize: isMobile ? '14px' : '16px',
                   fontWeight: '600',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
-                  minWidth: '140px',
+                  minWidth: isMobile ? '120px' : '140px',
                   textAlign: 'center'
                 }}
               >
@@ -447,14 +544,14 @@ const MenuFilterArea = () => {
                 style={{
                   backgroundColor: activeFilter === 'addons' ? '#FCB53B' : 'white',
                   color: activeFilter === 'addons' ? 'white' : '#6b7280',
-                  padding: '8px 24px',
+                  padding: isMobile ? '10px 20px' : '8px 24px',
                   borderRadius: '8px',
                   border: '2px solid #e5e7eb',
-                  fontSize: '16px',
+                  fontSize: isMobile ? '14px' : '16px',
                   fontWeight: '600',
                   cursor: 'pointer',
                   transition: 'all 0.3s ease',
-                  minWidth: '140px',
+                  minWidth: isMobile ? '120px' : '140px',
                   textAlign: 'center'
                 }}
               >
@@ -466,9 +563,23 @@ const MenuFilterArea = () => {
 
         {/* Menu Items Grid */}
         {activeFilter === 'thali' && (
-          <div className="row" style={{ marginLeft: '0', marginRight: '0', display: 'flex', gap: '12px' }}>
+          <div className="row" style={{ 
+            marginLeft: '0', 
+            marginRight: '0', 
+            display: 'grid',
+            gridTemplateColumns: isMobile 
+              ? 'repeat(auto-fit, minmax(280px, 1fr))' 
+              : 'repeat(auto-fit, minmax(300px, 1fr))',
+            gap: isMobile ? '16px' : '20px', 
+            justifyItems: 'stretch'
+          }}>
             {thaliItems.map((item) => (
-              <div key={item.id} style={{ width: 'calc(20% - 9.6px)', marginBottom: '30px' }}>
+              <div key={item.id} style={{ 
+                marginBottom: isMobile ? '20px' : '30px',
+                width: '100%',
+                maxWidth: isMobile ? 'none' : '350px',
+                justifySelf: 'center'
+              }}>
                 <div style={{
                   backgroundColor: 'white',
                   borderRadius: '12px',
@@ -478,7 +589,10 @@ const MenuFilterArea = () => {
                   width: '100%'
                 }}>
                   {/* Product Image */}
-                  <div style={{height: '180px', overflow: 'hidden'}}>
+                  <div style={{
+                    height: isMobile ? '160px' : '180px', 
+                    overflow: 'hidden'
+                  }}>
                     <div 
                       style={{
                         backgroundImage: `url(${item.image})`,
@@ -491,12 +605,15 @@ const MenuFilterArea = () => {
                   </div>
 
                   {/* Product Content */}
-                  <div style={{padding: '12px'}}>
+                  <div style={{
+                    padding: isMobile ? '16px' : '12px'
+                  }}>
                     <h3 style={{
-                      fontSize: '18px',
+                      fontSize: isMobile ? '16px' : '18px',
                       fontWeight: '700',
                       marginBottom: '2px',
-                      color: '#1f2937'
+                      color: '#1f2937',
+                      lineHeight: '1.3'
                     }}>
                       <Link href={`/product-details/${item.id}`} style={{color: 'inherit', textDecoration: 'none'}}>
                         {item.title}
@@ -504,23 +621,23 @@ const MenuFilterArea = () => {
                     </h3>
 
                     <p style={{
-                      fontSize: '14px',
+                      fontSize: isMobile ? '13px' : '14px',
                       color: '#6b7280',
-                      marginBottom: '4px',
+                      marginBottom: isMobile ? '6px' : '4px',
                       fontWeight: '500'
                     }}>
                       {item.subtitle}
                     </p>
 
                     {/* Rating */}
-                    <div style={{marginBottom: '4px'}}>
+                    <div style={{marginBottom: isMobile ? '6px' : '4px'}}>
                       <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
                         <div style={{display: 'flex', alignItems: 'center'}}>
                           {[...Array(5)].map((_, i) => (
                             <svg
                               key={i}
-                              width="14"
-                              height="14"
+                              width={isMobile ? "12" : "14"}
+                              height={isMobile ? "12" : "14"}
                               viewBox="0 0 24 24"
                               fill={i < Math.floor(item.rating) ? '#ffc107' : '#e5e7eb'}
                               style={{marginRight: '2px'}}
@@ -529,17 +646,35 @@ const MenuFilterArea = () => {
                             </svg>
                           ))}
                         </div>
-                        <span style={{fontSize: '12px', color: '#6b7280', marginLeft: '4px'}}>
+                        <span style={{
+                          fontSize: isMobile ? '11px' : '12px', 
+                          color: '#6b7280', 
+                          marginLeft: '4px'
+                        }}>
                           {item.rating}
                         </span>
                       </div>
                     </div>
 
                     {/* Product Details - Time and Servings */}
-                    <div style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '4px'}}>
+                    <div style={{
+                      display: 'flex', 
+                      alignItems: 'center', 
+                      justifyContent: 'space-between', 
+                      marginBottom: isMobile ? '6px' : '4px'
+                    }}>
                       {/* Time */}
-                      <div style={{display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#6b7280'}}>
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{width: '16px', height: '16px'}}>
+                      <div style={{
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: isMobile ? '4px' : '6px', 
+                        fontSize: isMobile ? '11px' : '12px', 
+                        color: '#6b7280'
+                      }}>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{
+                          width: isMobile ? '14px' : '16px', 
+                          height: isMobile ? '14px' : '16px'
+                        }}>
                           <circle cx="12" cy="12" r="10"/>
                           <polyline points="12,6 12,12 16,14"/>
                         </svg>
@@ -547,8 +682,17 @@ const MenuFilterArea = () => {
                       </div>
                       
                       {/* Servings */}
-                      <div style={{display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', color: '#6b7280'}}>
-                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{width: '16px', height: '16px'}}>
+                      <div style={{
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: isMobile ? '4px' : '6px', 
+                        fontSize: isMobile ? '11px' : '12px', 
+                        color: '#6b7280'
+                      }}>
+                        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{
+                          width: isMobile ? '14px' : '16px', 
+                          height: isMobile ? '14px' : '16px'
+                        }}>
                           <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
                           <circle cx="9" cy="7" r="4"/>
                           <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
@@ -559,12 +703,12 @@ const MenuFilterArea = () => {
                     </div>
 
                     {/* Cuisine Type */}
-                    <div style={{marginBottom: '8px'}}>
+                    <div style={{marginBottom: isMobile ? '10px' : '8px'}}>
                       <span style={{
-                        fontSize: '12px',
+                        fontSize: isMobile ? '11px' : '12px',
                         color: '#6b7280',
                         backgroundColor: '#f3f4f6',
-                        padding: '4px 8px',
+                        padding: isMobile ? '3px 6px' : '4px 8px',
                         borderRadius: '4px'
                       }}>
                         {item.cuisine}
@@ -575,11 +719,12 @@ const MenuFilterArea = () => {
                     <div style={{
                       display: 'flex',
                       justifyContent: 'space-between',
-                      alignItems: 'center'
+                      alignItems: 'center',
+                      gap: isMobile ? '8px' : '12px'
                     }}>
                       <div>
                         <span style={{
-                          fontSize: '20px',
+                          fontSize: isMobile ? '18px' : '20px',
                           fontWeight: '700',
                           color: '#FCB53B'
                         }}>
@@ -592,17 +737,17 @@ const MenuFilterArea = () => {
                           style={{
                             backgroundColor: '#FCB53B',
                             color: 'white',
-                            padding: '6px 16px',
+                            padding: isMobile ? '8px 14px' : '6px 16px',
                             borderRadius: '6px',
                             textDecoration: 'none',
-                            fontSize: '13px',
+                            fontSize: isMobile ? '12px' : '13px',
                             fontWeight: '600',
                             border: 'none',
                             cursor: 'pointer',
                             transition: 'all 0.3s ease',
                             boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                            height: '32px',
-                            minWidth: '80px',
+                            height: isMobile ? '36px' : '32px',
+                            minWidth: isMobile ? '70px' : '80px',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center'
@@ -621,10 +766,10 @@ const MenuFilterArea = () => {
 
         {activeFilter === 'addons' && (
           <div style={{ 
-            padding: '24px'
+            padding: isMobile ? '16px' : '24px'
           }}>
             {/* Add-ons Header */}
-            <div style={{ marginBottom: '20px' }}>
+            <div style={{ marginBottom: isMobile ? '16px' : '20px' }}>
               {/* <h3 style={{ 
                 fontSize: '24px', 
                 fontWeight: '600', 
@@ -639,7 +784,7 @@ const MenuFilterArea = () => {
             {/* Horizontal Scrollable Add-ons */}
             <div style={{ 
               display: 'flex', 
-              gap: '16px', 
+              gap: isMobile ? '12px' : '16px', 
               overflowX: 'auto', 
               paddingBottom: '8px',
               scrollbarWidth: 'thin',
@@ -647,7 +792,7 @@ const MenuFilterArea = () => {
             }}>
               {addonsItems.map((item) => (
                 <div key={item.id} style={{ 
-                  minWidth: '280px', 
+                  minWidth: isMobile ? '250px' : '280px', 
                   flexShrink: 0,
                   background: 'white',
                   borderRadius: '8px',
@@ -657,15 +802,22 @@ const MenuFilterArea = () => {
                   cursor: 'pointer'
                 }}
                 onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                  if (!isMobile) {
+                    e.currentTarget.style.transform = 'translateY(-4px)';
+                    e.currentTarget.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                  }
                 }}
                 onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'none';
+                  if (!isMobile) {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }
                 }}>
                   {/* Product Image */}
-                  <div style={{ height: '120px', overflow: 'hidden' }}>
+                  <div style={{ 
+                    height: isMobile ? '100px' : '120px', 
+                    overflow: 'hidden' 
+                  }}>
                     <div
                       style={{
                         backgroundImage: `url(${item.image})`,
@@ -678,15 +830,17 @@ const MenuFilterArea = () => {
                   </div>
                   
                   {/* Product Info */}
-                  <div style={{ padding: '16px' }}>
+                  <div style={{ 
+                    padding: isMobile ? '12px' : '16px' 
+                  }}>
                     <div style={{ 
                       display: 'flex', 
                       justifyContent: 'space-between', 
                       alignItems: 'flex-start',
-                      marginBottom: '8px'
+                      marginBottom: isMobile ? '6px' : '8px'
                     }}>
                       <h6 style={{ 
-                        fontSize: '16px', 
+                        fontSize: isMobile ? '14px' : '16px', 
                         fontWeight: '600', 
                         color: '#333',
                         margin: 0,
@@ -695,10 +849,10 @@ const MenuFilterArea = () => {
                         {item.title}
                       </h6>
                       <span style={{
-                        fontSize: '12px',
+                        fontSize: isMobile ? '11px' : '12px',
                         color: '#666',
                         background: '#f5f5f5',
-                        padding: '2px 8px',
+                        padding: isMobile ? '2px 6px' : '2px 8px',
                         borderRadius: '12px',
                         fontWeight: '500'
                       }}>
@@ -707,11 +861,11 @@ const MenuFilterArea = () => {
                     </div>
                     
                     <p style={{ 
-                      fontSize: '13px', 
+                      fontSize: isMobile ? '12px' : '13px', 
                       color: '#666', 
-                      marginBottom: '12px',
+                      marginBottom: isMobile ? '10px' : '12px',
                       lineHeight: '1.4',
-                      margin: '0 0 12px 0'
+                      margin: isMobile ? '0 0 10px 0' : '0 0 12px 0'
                     }}>
                       {item.description}
                     </p>
@@ -720,10 +874,11 @@ const MenuFilterArea = () => {
                     <div style={{ 
                       display: 'flex', 
                       justifyContent: 'space-between', 
-                      alignItems: 'center' 
+                      alignItems: 'center',
+                      gap: isMobile ? '6px' : '8px'
                     }}>
                       <span style={{ 
-                        fontSize: '16px', 
+                        fontSize: isMobile ? '14px' : '16px', 
                         fontWeight: '700', 
                         color: '#FCB53B' 
                       }}>
@@ -735,24 +890,24 @@ const MenuFilterArea = () => {
                         style={{
                           backgroundColor: !hasThaliInCart ? '#6b7280' : '#FCB53B',
                           color: 'white',
-                          padding: '6px 16px',
+                          padding: isMobile ? '6px 12px' : '6px 16px',
                           borderRadius: '6px',
                           textDecoration: 'none',
-                          fontSize: '13px',
+                          fontSize: isMobile ? '11px' : '13px',
                           fontWeight: '600',
                           border: 'none',
                           cursor: !hasThaliInCart ? 'not-allowed' : 'pointer',
                           transition: 'all 0.3s ease',
                           boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-                          height: '32px',
-                          minWidth: '80px',
+                          height: isMobile ? '30px' : '32px',
+                          minWidth: isMobile ? '70px' : '80px',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
                           opacity: !hasThaliInCart ? 0.6 : 1
                         }}
                       >
-                        {!hasThaliInCart ? 'Add Thali First' : 'Add'}
+                        {!hasThaliInCart ? (isMobile ? 'Add Thali' : 'Add Thali First') : 'Add'}
                       </button>
                     </div>
                   </div>

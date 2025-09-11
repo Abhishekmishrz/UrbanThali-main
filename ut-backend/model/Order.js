@@ -80,8 +80,28 @@ const orderSchema = new mongoose.Schema(
     },
     status: {
       type: String,
-      enum: ["pending", "processing", "delivered",'cancel'],
+      enum: ["pending", "confirmed", "preparing", "ready", "out-for-delivery", "delivered", "cancelled"],
       lowercase: true,
+      default: "pending"
+    },
+    estimatedDeliveryTime: {
+      type: Date,
+      required: false
+    },
+    actualDeliveryTime: {
+      type: Date,
+      required: false
+    },
+    deliveryInstructions: {
+      type: String,
+      required: false
+    },
+    restaurant: {
+      name: String,
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Brand"
+      }
     },
   },
   {

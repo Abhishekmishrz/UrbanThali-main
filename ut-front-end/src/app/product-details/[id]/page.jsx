@@ -8,18 +8,14 @@ export const metadata = {
   title: "UrbanThali - Product Details Page",
 };
 
-export default function ProductDetailsPage({ params }) {
-  // Check if this is a thali product (IDs 1-5)
-  const isThaliProduct = params.id >= 1 && params.id <= 5;
-
+export default async function ProductDetailsPage({ params }) {
+  // All products are thali products in Urban Thali system
+  const { id } = await params;
+  
   return (
     <Wrapper>
       <HeaderThree />
-      {isThaliProduct ? (
-        <ThaliDetailsArea id={params.id} />
-      ) : (
-        <ProductDetailsArea id={params.id} />
-      )}
+      <ThaliDetailsArea id={id} />
       <UrbanThaliFooter />
     </Wrapper>
   );

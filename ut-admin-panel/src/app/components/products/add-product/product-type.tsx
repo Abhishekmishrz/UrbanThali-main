@@ -58,6 +58,7 @@ const ProductType = ({
               handleSelectProduct(selectedOption?.value);
             }}
             options={[
+              // Main Food Categories
               { value: "appetizers", label: "Appetizers & Starters" },
               { value: "main-course", label: "Main Course" },
               { value: "breads", label: "Breads & Naan" },
@@ -70,6 +71,16 @@ const ProductType = ({
               { value: "street-food", label: "Street Food" },
               { value: "breakfast", label: "Breakfast" },
               { value: "snacks", label: "Snacks" },
+              
+              // Add-on Categories
+              { value: "addon-bread", label: "Add-on: Extra Bread" },
+              { value: "addon-dairy", label: "Add-on: Dairy Products" },
+              { value: "addon-rice", label: "Add-on: Rice Items" },
+              { value: "addon-drinks", label: "Add-on: Drinks & Beverages" },
+              { value: "addon-sides", label: "Add-on: Sides & Extras" },
+              { value: "addon-sweets", label: "Add-on: Desserts & Sweets" },
+              { value: "addon-condiments", label: "Add-on: Condiments & Pickles" },
+              { value: "addon-curries", label: "Add-on: Extra Curries" },
             ]}
           />
         )}

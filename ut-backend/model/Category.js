@@ -13,19 +13,20 @@ const CategorySchema = mongoose.Schema({
     unique:true,
    },
    children:[{type:String}],
-   productType:{
+   foodType:{
     type:String,
     trim:true,
     required:true,
     lowercase: true,
+    enum: ["veg", "non-veg", "vegan", "jain", "mixed"]
    },
    description:{
     type:String,
     required:false,
    },
-   products: [{
+   foodItems: [{
     type: ObjectId,
-    ref: "Products"
+    ref: "FoodItem"
   }],
    status: {
     type: String,

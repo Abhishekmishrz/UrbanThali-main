@@ -5,17 +5,36 @@ const { cloudinaryServices } = require("../services/cloudinary.service");
 const saveImageCloudinary = async (req, res,next) => {
   // console.log(req.file)
   try {
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "No file uploaded. Please select an image file.",
+      });
+    }
+
+    if (!req.file.buffer) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid file format. Please upload a valid image file.",
+      });
+    }
+
     const result = await cloudinaryServices.cloudinaryImageUpload(
       req.file.buffer
     );
+    
     res.status(200).json({
       success: true,
       message: "image uploaded successfully",
       data:{url:result.secure_url,id:result.public_id},
     });
   } catch (err) {
-    console.log(err);
-    next(err)
+    console.log('Cloudinary upload error:', err);
+    res.status(500).json({
+      success: false,
+      message: "Failed to upload image to Cloudinary",
+      error: err.message || "Unknown error occurred"
+    });
   }
 };
 
