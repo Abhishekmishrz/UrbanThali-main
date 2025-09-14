@@ -24,7 +24,7 @@ type ICategory = {
   id: string;
 };
 
-type status = "available" | "unavailable" | "discontinued" | "in-stock" | "out-of-stock";
+type Status = "available" | "unavailable" | "discontinued";
 
 const useProductSubmit = () => {
   const [sku, setSku] = useState<string>("");
@@ -40,7 +40,7 @@ const useProductSubmit = () => {
   const [quantity, setQuantity] = useState<number>(0);
   const [brand, setBrand] = useState<IBrand>({ name: "", id: "" });
   const [category, setCategory] = useState<ICategory>({ name: "", id: "" });
-  const [status, setStatus] = useState<status>("available");
+  const [status, setStatus] = useState<Status>("available");
   const [productType, setProductType] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [videoId, setVideoId] = useState<string>("");
@@ -139,7 +139,7 @@ const useProductSubmit = () => {
       brand: selectedBrand, // Keep brand for backward compatibility
       restaurant: selectedBrand, // Backend expects 'restaurant' not 'brand'
       category: category,
-      status: status === "available" ? "in-stock" : status === "unavailable" ? "out-of-stock" : status as any,
+      status: status as "available" | "unavailable" | "discontinued",
       productType: productType || "veg", // Add productType field
       offerDate: {
         startDate: offerDate.startDate,
@@ -221,7 +221,7 @@ const useProductSubmit = () => {
       brand: selectedBrand, // Keep brand for backward compatibility
       restaurant: selectedBrand, // Backend expects 'restaurant' not 'brand'
       category: category,
-      status: status === "available" ? "in-stock" : status === "unavailable" ? "out-of-stock" : status as any,
+      status: status as "available" | "unavailable" | "discontinued",
       productType: productType || "veg", // Add productType field
       offerDate: {
         startDate: offerDate.startDate,

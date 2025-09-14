@@ -54,7 +54,7 @@ export interface IProduct {
   price: number;
   discount?: number;
   quantity: number;
-  status: 'in-stock' | 'out-of-stock' | 'discontinued';
+  status: 'available' | 'unavailable' | 'discontinued';
   reviews?: TReview[];
   productType: string;
   description: string;
@@ -99,7 +99,7 @@ export interface IAddProduct {
   quantity: number;
   brand: { name: string, id: string };
   category: { name: string, id: string };
-  status: 'in-stock' | 'out-of-stock' | 'discontinued';
+  status: 'available' | 'unavailable' | 'discontinued';
   productType: string;
   description: string;
   videoId?: string;

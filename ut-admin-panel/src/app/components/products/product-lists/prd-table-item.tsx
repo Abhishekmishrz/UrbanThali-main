@@ -50,7 +50,7 @@ const ProductTableItem = ({ product }: { product: IProduct }) => {
       <td className="px-3 py-3 text-end">
         <span
           className={`text-[11px] px-3 py-1 rounded-md leading-none font-medium text-end ${
-            status === "in-stock"
+            status === "available"
               ? "text-success bg-success/10"
               : "text-danger bg-danger/10"
           }`}

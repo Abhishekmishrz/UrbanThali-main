@@ -107,8 +107,9 @@ const ProductListArea = () => {
               </span>
               <select onChange={handleSelectField}>
                 <option value="">Status</option>
-                <option value="in-stock">In stock</option>
-                <option value="out-of-stock">Out of stock</option>
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+                <option value="discontinued">Discontinued</option>
               </select>
             </div>
             <div className="product-add-btn flex ">
