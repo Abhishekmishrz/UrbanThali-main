@@ -156,7 +156,7 @@ const AddAddonSubmit = () => {
               <Tags tags={tags} setTags={setTags} />
             </div>
             <p className="text-sm text-gray-600">
-              Add relevant tags like "vegetarian", "dairy", "spicy", etc.
+              Add relevant tags like &quot;vegetarian&quot;, &quot;dairy&quot;, &quot;spicy&quot;, etc.
             </p>
           </div>
 

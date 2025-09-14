@@ -24,7 +24,7 @@ type ICategory = {
   id: string;
 };
 
-type status = "available" | "unavailable" | "discontinued";
+type status = "available" | "unavailable" | "discontinued" | "in-stock" | "out-of-stock";
 
 const useProductSubmit = () => {
   const [sku, setSku] = useState<string>("");
@@ -127,6 +127,7 @@ const useProductSubmit = () => {
       sku: data.SKU,
       img: img,
       name: data["Add-on_Name"] || data["Dish_Name"] || data.title || data.name, // Handle multiple possible field names
+      title: data["Add-on_Name"] || data["Dish_Name"] || data.title || data.name, // Add title field
       slug: slugify(data["Add-on_Name"] || data["Dish_Name"] || data.title || data.name || "item", { replacement: "-", lower: true }),
       unit: data.unit || "piece",
       imageURLs: imageURLs,
@@ -135,9 +136,11 @@ const useProductSubmit = () => {
       price: Number(data.price),
       discount: Number(data["discount_percentage"]) || 0,
       quantity: Number(data.quantity),
+      brand: selectedBrand, // Keep brand for backward compatibility
       restaurant: selectedBrand, // Backend expects 'restaurant' not 'brand'
       category: category,
-      status: status,
+      status: status === "available" ? "in-stock" : status === "unavailable" ? "out-of-stock" : status as any,
+      productType: productType || "veg", // Add productType field
       offerDate: {
         startDate: offerDate.startDate,
         endDate: offerDate.endDate,
@@ -206,6 +209,7 @@ const useProductSubmit = () => {
       sku: data.SKU,
       img: img,
       name: data["Dish_Name"] || data.title || data.name, // Handle multiple field names
+      title: data["Dish_Name"] || data.title || data.name, // Add title field
       slug: slugify(data["Dish_Name"] || data.title || data.name || "item", { replacement: "-", lower: true }),
       unit: data.unit || "piece",
       imageURLs: imageURLs,
@@ -214,9 +218,11 @@ const useProductSubmit = () => {
       price: Number(data.price),
       discount: Number(data["discount_percentage"]) || 0,
       quantity: Number(data.quantity),
+      brand: selectedBrand, // Keep brand for backward compatibility
       restaurant: selectedBrand, // Backend expects 'restaurant' not 'brand'
       category: category,
-      status: status,
+      status: status === "available" ? "in-stock" : status === "unavailable" ? "out-of-stock" : status as any,
+      productType: productType || "veg", // Add productType field
       offerDate: {
         startDate: offerDate.startDate,
         endDate: offerDate.endDate,

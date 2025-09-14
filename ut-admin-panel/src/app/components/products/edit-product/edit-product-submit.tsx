@@ -137,7 +137,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
                   <OfferDatePicker
                     offerDate={offerDate}
                     setOfferDate={setOfferDate}
-                    defaultValue={product?.offerDate || null}
+                    defaultValue={product?.offerDate || undefined}
                   />
                   <span className="text-tiny leading-4">
                     set the product offer and end date
