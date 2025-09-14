@@ -4,7 +4,7 @@ import useProductSubmit from "@/hooks/useProductSubmit";
 import ErrorMsg from "../../common/error-msg";
 import FormField from "../form-field";
 import DescriptionTextarea from "../add-product/description-textarea";
-import { useGetSingleProductQuery } from "@/redux/product/productApi";
+import { useGetProductQuery } from "@/redux/product/productApi";
 import OfferDatePicker from "../add-product/offer-date-picker";
 import ProductTypeBrand from "../add-product/product-type-brand";
 import AdditionalInformation from "../add-product/additional-information";
@@ -14,7 +14,7 @@ import Tags from "../add-product/tags";
 import ProductCategory from "../../category/product-category";
 
 const EditProductSubmit = ({ id }: { id: string }) => {
-  const { data: product, isError, isLoading } = useGetSingleProductQuery(id);
+  const { data: product, isError, isLoading } = useGetProductQuery(id);
   const {
     handleSubmit,
     handleSubmitProduct,
@@ -65,12 +65,12 @@ const EditProductSubmit = ({ id }: { id: string }) => {
                 placeHolder="Product Title"
                 register={register}
                 errors={errors}
-                defaultValue={product.title}
+                defaultValue={product?.title || ''}
               />
               <DescriptionTextarea
                 register={register}
                 errors={errors}
-                defaultValue={product.description}
+                defaultValue={product?.description || ''}
               />
             </div>
 
@@ -82,7 +82,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
                   placeHolder="Product price"
                   bottomTitle="Set the base price of product."
                   type="number"
-                  defaultValue={product.price}
+                  defaultValue={product?.price || 0}
                   register={register}
                   errors={errors}
                 />
@@ -91,7 +91,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
                   isRequired={true}
                   placeHolder="SKU"
                   bottomTitle="Enter the product SKU."
-                  defaultValue={product.sku}
+                  defaultValue={product?.sku || ''}
                   register={register}
                   errors={errors}
                 />
@@ -101,7 +101,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
                   placeHolder="Quantity"
                   bottomTitle="Enter the product quantity."
                   type="number"
-                  defaultValue={product.quantity}
+                  defaultValue={product?.quantity || 0}
                   register={register}
                   errors={errors}
                 />
@@ -111,7 +111,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
                   isRequired={false}
                   placeHolder="Discount"
                   bottomTitle="Set the product Discount."
-                  defaultValue={product.discount}
+                  defaultValue={product?.discount || 0}
                   register={register}
                   errors={errors}
                 />
@@ -125,7 +125,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
                   isRequired={false}
                   placeHolder="video id"
                   bottomTitle="Set the video id of product."
-                  defaultValue={product.videoId}
+                  defaultValue={product?.videoId || ''}
                   register={register}
                   errors={errors}
                 />
@@ -137,7 +137,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
                   <OfferDatePicker
                     offerDate={offerDate}
                     setOfferDate={setOfferDate}
-                    defaultValue={product.offerDate}
+                    defaultValue={product?.offerDate || null}
                   />
                   <span className="text-tiny leading-4">
                     set the product offer and end date
@@ -155,9 +155,9 @@ const EditProductSubmit = ({ id }: { id: string }) => {
               setSelectBrand={setBrand}
               setSelectProductType={setProductType}
               default_value={{
-                brand: product.brand.name,
-                product_type: product.productType,
-                unit: product.unit,
+                brand: product.brand?.name || '',
+                product_type: product.productType || '',
+                unit: product.unit || '',
               }}
             />
             {/* product type and brands end */}
@@ -165,7 +165,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
             {/* additional information page start */}
             <AdditionalInformation
               setAdditionalInformation={setAdditionalInformation}
-              default_value={product.additionalInformation}
+              default_value={product?.additionalInformation || []}
             />
             {/* additional information page end */}
 
@@ -173,7 +173,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
             <ProductVariants
               isSubmitted={isSubmitted}
               setImageURLs={setImageURLs}
-              default_value={product.imageURLs}
+              default_value={product?.imageURLs || []}
             />
             {/* product variations end */}
           </div>
@@ -183,7 +183,7 @@ const EditProductSubmit = ({ id }: { id: string }) => {
             <ProductImgUpload
               imgUrl={img}
               setImgUrl={setImg}
-              default_img={product.img}
+              default_img={product?.img || ''}
               isSubmitted={isSubmitted}
             />
 
@@ -196,15 +196,15 @@ const EditProductSubmit = ({ id }: { id: string }) => {
                   setParent={setParent}
                   setChildren={setChildren}
                   default_value={{
-                    parent: product.category.name,
-                    id: product.category.id,
-                    children: product.children,
+                    parent: product.category?.name || '',
+                    id: product.category?.id || '',
+                    children: product.children || '',
                   }}
                 />
                 <Tags
                   tags={tags}
                   setTags={setTags}
-                  default_value={product.tags}
+                  default_value={product?.tags || []}
                 />
               </div>
             </div>

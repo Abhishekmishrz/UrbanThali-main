@@ -1,5 +1,5 @@
 import Wrapper from "@/layout/wrapper";
-import HeaderTwo from "@/layout/headers/header-2";
+import HeaderThree from "@/layout/headers/header-3";
 import ProductDetailsArea from "@/components/product-details/product-details-area";
 import UrbanThaliFooter from "@/layout/footers/urban-thali-footer";
 
@@ -10,8 +10,10 @@ export const metadata = {
 export default function ProductDetailsPage() {
   return (
     <Wrapper>
-      <HeaderTwo style_2={true} />
-      <ProductDetailsArea id="6431364df5a812bd37e765ac" />
+      <HeaderThree />
+      <div style={{ paddingTop: '135px' }}>
+        <ProductDetailsArea id="6431364df5a812bd37e765ac" />
+      </div>
       <UrbanThaliFooter />
     </Wrapper>
   );

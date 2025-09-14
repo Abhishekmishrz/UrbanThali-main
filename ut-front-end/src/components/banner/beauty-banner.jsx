@@ -47,7 +47,13 @@ const BeautyBanner = () => {
 
   return (
     <>
-      <section className="tp-slider-area p-relative z-index-1" style={{ marginTop: '120px', paddingTop: '0' }}>
+      <section className="tp-slider-area p-relative z-index-1" style={{ 
+        marginTop: '0', 
+        paddingTop: '0',
+        position: 'relative',
+        top: '-60px',
+        paddingTop: '60px'
+      }}>
         <Swiper
           {...slider_setting}
           modules={[Navigation, EffectFade, Pagination]}
@@ -57,21 +63,39 @@ const BeautyBanner = () => {
             <SwiperSlide
               key={item.id}
               className="tp-slider-item-3 p-relative black-bg d-flex align-items-center"
-              style={{height: '80vh', minHeight: '80vh', marginTop: '0', paddingTop: '0'}}
+              style={{
+                height: '80vh', 
+                minHeight: '80vh', 
+                marginTop: '0', 
+                paddingTop: '0'
+              }}
             >
               <div
                 className="tp-slider-thumb-3 include-bg"
-                style={{ backgroundImage: `url(${item.bg.src})` }}
+                style={{ 
+                  backgroundImage: `url(${item.bg.src})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundRepeat: 'no-repeat'
+                }}
               ></div>
-              <div className="container">
+              <div className="container" style={{ padding: '0 15px' }}>
                 <div className="row justify-content-center">
                   <div className="col-xl-8 col-lg-10 col-md-12 text-center">
-                    <div className="tp-slider-content-3">
+                    <div className="tp-slider-content-3" style={{ padding: '20px 0' }}>
                       <h3 className="tp-slider-title-3" style={{
                         fontSize: '3.5rem',
                         fontWeight: 'bold',
                         marginBottom: '20px',
-                        lineHeight: '1.2'
+                        lineHeight: '1.2',
+                        '@media (max-width: 768px)': {
+                          fontSize: '2.5rem',
+                          marginBottom: '15px'
+                        },
+                        '@media (max-width: 480px)': {
+                          fontSize: '2rem',
+                          marginBottom: '10px'
+                        }
                       }}>
                         <span style={{color: 'white'}}>Authentic</span>{' '}
                         <span style={{color: '#FCB53B'}}>Indian Thali</span>{' '}
@@ -82,11 +106,35 @@ const BeautyBanner = () => {
                         color: '#e5e7eb',
                         marginBottom: '30px',
                         maxWidth: '600px',
-                        margin: '0 auto 30px auto'
+                        margin: '0 auto 30px auto',
+                        '@media (max-width: 768px)': {
+                          fontSize: '16px',
+                          margin: '0 auto 20px auto',
+                          padding: '0 10px'
+                        },
+                        '@media (max-width: 480px)': {
+                          fontSize: '14px',
+                          margin: '0 auto 15px auto'
+                        }
                       }}>
                         Experience the rich flavors of traditional Indian cuisine with our carefully curated thalis, made with the finest ingredients and delivered hot to your doorstep.
                       </p>
-                      <div className="tp-slider-btn-3 d-flex justify-content-center gap-3">
+                      <div className="tp-slider-btn-3 d-flex justify-content-center" style={{
+                        gap: '15px',
+                        flexWrap: 'nowrap',
+                        '@media (max-width: 768px)': {
+                          flexDirection: 'row',
+                          gap: '12px',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        },
+                        '@media (max-width: 480px)': {
+                          flexDirection: 'row',
+                          gap: '10px',
+                          alignItems: 'center',
+                          justifyContent: 'center'
+                        }
+                      }}>
                         <button
                           type="button"
                           onClick={() => {
@@ -102,18 +150,18 @@ const BeautyBanner = () => {
                           style={{
                             backgroundColor: '#FCB53B',
                             color: 'white',
-                            padding: '12px 40px',
-                            borderRadius: '8px',
+                            padding: '8px 20px',
+                            borderRadius: '6px',
                             textDecoration: 'none',
-                            fontSize: '16px',
+                            fontSize: '15px',
                             fontWeight: '600',
                             border: 'none',
                             display: 'inline-block',
-                            minWidth: '140px',
+                            minWidth: '120px',
                             textAlign: 'center',
                             cursor: 'pointer',
                             transition: 'all 0.3s ease',
-                            boxShadow: '0 4px 8px rgba(252, 181, 59, 0.3)',
+                            boxShadow: '0 2px 6px rgba(252, 181, 59, 0.3)',
                             outline: 'none',
                             position: 'relative',
                             zIndex: 10,
@@ -137,18 +185,18 @@ const BeautyBanner = () => {
                           style={{
                             backgroundColor: 'white',
                             color: 'black',
-                            padding: '12px 40px',
-                            borderRadius: '8px',
+                            padding: '8px 20px',
+                            borderRadius: '6px',
                             textDecoration: 'none',
-                            fontSize: '16px',
+                            fontSize: '15px',
                             fontWeight: '600',
-                            border: '2px solid #e5e7eb',
+                            border: '1px solid #e5e7eb',
                             display: 'inline-block',
-                            minWidth: '140px',
+                            minWidth: '120px',
                             textAlign: 'center',
                             cursor: 'pointer',
                             transition: 'all 0.3s ease',
-                            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+                            boxShadow: '0 2px 6px rgba(0, 0, 0, 0.1)',
                             outline: 'none',
                             position: 'relative',
                             zIndex: 10,

@@ -7,11 +7,12 @@ export const metadata = {
   title: "UrbanThali - Order Page",
 };
 
-export default function OrderPage({ params }) {
+export default async function OrderPage({ params }) {
+  const { id } = await params;
   return (
     <Wrapper>
       <HeaderThree />
-      <OrderArea orderId={params.id} />
+      <OrderArea orderId={id} />
       <UrbanThaliFooter />
     </Wrapper>
   );

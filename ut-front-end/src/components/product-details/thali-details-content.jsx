@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useDispatch, useSelector } from 'react-redux';
 import { add_cart_product } from '@/redux/features/cartSlice';
+import useNotification from '@/hooks/use-notification';
 
 const ThaliDetailsContent = ({ thali }) => {
   const dispatch = useDispatch();
   const { cart_products } = useSelector((state) => state.cart);
   const [quantity, setQuantity] = useState(1);
+  const { showSuccess } = useNotification();
 
   // Allow unlimited additions to cart
   const isInCart = false;
@@ -18,6 +20,7 @@ const ThaliDetailsContent = ({ thali }) => {
       orderQuantity: quantity
     };
     dispatch(add_cart_product(productToAdd));
+    showSuccess(`${quantity} ${thali.title} added to cart!`);
   };
 
   const handleQuantityChange = (change) => {
@@ -125,7 +128,7 @@ const ThaliDetailsContent = ({ thali }) => {
                       </div>
 
                       {/* Items Included */}
-                      {thali.ingredients && thali.ingredients.length > 0 && (
+                      {thali.items && thali.items.length > 0 && (
                         <div style={{ marginBottom: '20px' }}>
                           <h3 style={{
                             fontSize: '1.1rem',
@@ -133,10 +136,10 @@ const ThaliDetailsContent = ({ thali }) => {
                             color: '#1f2937',
                             marginBottom: '10px'
                           }}>
-                            What's Included:
+                            What&apos;s Included:
                           </h3>
                           <ul style={{ paddingLeft: '0', listStyle: 'none', margin: 0 }}>
-                            {thali.ingredients.map((item, index) => (
+                            {thali.items.map((item, index) => (
                               <li key={index} style={{
                                 display: 'flex',
                                 alignItems: 'center',
@@ -158,20 +161,23 @@ const ThaliDetailsContent = ({ thali }) => {
                         </div>
                       )}
 
+
                       {/* Product Details */}
                       <div style={{ marginBottom: '20px' }}>
                         <div className="row">
-                          <div className="col-6">
-                            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
-                              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{ width: '16px', height: '16px', color: '#FCB53B', marginRight: '6px' }}>
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12,6 12,12 16,14"/>
-                              </svg>
-                              <span style={{ color: '#6b7280', fontSize: '0.85rem' }}>
-                                {thali.prepTime}
-                              </span>
+                          {thali.prepTime && (
+                            <div className="col-6">
+                              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
+                                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{ width: '16px', height: '16px', color: '#FCB53B', marginRight: '6px' }}>
+                                  <circle cx="12" cy="12" r="10"/>
+                                  <polyline points="12,6 12,12 16,14"/>
+                                </svg>
+                                <span style={{ color: '#6b7280', fontSize: '0.85rem' }}>
+                                  {thali.prepTime}
+                                </span>
+                              </div>
                             </div>
-                          </div>
+                          )}
                           <div className="col-6">
                             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '8px' }}>
                               <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" style={{ width: '16px', height: '16px', color: '#FCB53B', marginRight: '6px' }}>

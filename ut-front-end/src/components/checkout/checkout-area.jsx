@@ -32,7 +32,29 @@ const CheckoutArea = () => {
           {cart_products.length === 0 && (
             <div className="text-center pt-50">
               <h3 className="py-2">No items found in cart to checkout</h3>
-              <Link href="/shop" className="tp-checkout-btn">
+              <Link 
+                href="/shop" 
+                className="tp-checkout-btn"
+                style={{
+                  backgroundColor: '#FCB53B',
+                  color: 'white',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '6px',
+                  textDecoration: 'none',
+                  fontSize: '16px',
+                  fontWeight: '600',
+                  textAlign: 'center',
+                  display: 'inline-block',
+                  transition: 'all 0.3s ease'
+                }}
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = '#B45253';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = '#FCB53B';
+                }}
+              >
                 Return to shop
               </Link>
             </div>

@@ -42,10 +42,22 @@ const UserDropdown = () => {
       <Link href="/login" className="tp-header-login-btn" style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '8px',
+        gap: '4px',
         textDecoration: 'none',
         color: '#333',
-        fontSize: '14px'
+        fontSize: '12px',
+        padding: '6px',
+        borderRadius: '6px',
+        transition: 'all 0.3s ease',
+        minWidth: '36px',
+        minHeight: '36px',
+        justifyContent: 'center'
+      }}
+      onMouseOver={(e) => {
+        e.target.style.backgroundColor = '#f8f9fa';
+      }}
+      onMouseOut={(e) => {
+        e.target.style.backgroundColor = 'transparent';
       }}>
         <User />
         <span>Login</span>

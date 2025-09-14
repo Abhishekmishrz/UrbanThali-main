@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 // internal
 import BackToTopCom from "@/components/common/back-to-top";
 import ProductModal from "@/components/common/product-modal/index";
+import NotificationToast from "@/components/common/notification-toast";
 import {get_cart_products,initialOrderQuantity} from "@/redux/features/cartSlice";
 import { get_wishlist_products } from "@/redux/features/wishlist-slice";
 import { get_compare_products } from "@/redux/features/compareSlice";
@@ -43,6 +44,7 @@ const Wrapper = ({ children }) => {
       {children}
       <BackToTopCom />
       <ToastContainer />
+      <NotificationToast />
       {/* product modal start */}
       {productItem && <ProductModal />}
       {/* product modal end */}

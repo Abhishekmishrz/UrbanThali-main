@@ -3,3 +3,537 @@
 @import "swiper/css/bundle";
 @import 'node_modules/react-modal-video/scss/modal-video.scss';
 @import '../../public/assets/scss/main.scss';
+
+/* Mobile Responsive Styles for Urban Thali */
+
+/* Body padding to account for fixed navbar */
+body {
+  padding-top: 0 !important; /* Remove extra white space */
+}
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 0 !important; /* Remove extra white space on mobile too */
+  }
+}
+
+/* Header Mobile Styles */
+@media (max-width: 768px) {
+  .tp-header-bottom-3 {
+    padding: 8px 15px !important;
+    min-height: 50px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+  }
+  
+  .logo {
+    flex: 0 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    min-width: 120px !important;
+  }
+  
+  .logo img {
+    max-width: 150px !important;
+    max-height: 45px !important;
+  }
+  
+  .tp-header-action {
+    gap: 6px !important;
+    flex: 0 0 auto !important;
+    display: flex !important;
+    align-items: center !important;
+    min-width: 80px !important;
+  }
+  
+  .tp-header-action-btn {
+    padding: 6px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+  }
+  
+  .tp-header-action-item {
+    display: flex !important;
+    align-items: center !important;
+  }
+}
+
+/* Top Navbar Mobile Styles */
+@media (max-width: 768px) {
+  .tp-header-top-beauty {
+    height: 30px !important;
+    min-height: 30px !important;
+  }
+  
+  .tp-header-top-beauty .container-fluid {
+    height: 30px !important;
+  }
+  
+  .tp-header-contact-info {
+    height: 30px !important;
+  }
+  
+  .tp-header-social-links {
+    height: 30px !important;
+    gap: 10px !important;
+  }
+  
+  .tp-header-contact-text {
+    font-size: 12px !important;
+    height: 30px !important;
+  }
+}
+
+/* Banner Mobile Styles */
+@media (max-width: 768px) {
+  .tp-slider-area {
+    margin-top: 0 !important;
+    position: relative !important;
+    top: -60px !important;
+    padding-top: 60px !important;
+  }
+  
+  .tp-slider-item-3 {
+    height: 60vh !important;
+    min-height: 60vh !important;
+  }
+  
+  .tp-slider-content-3 {
+    padding: 20px 0 !important;
+  }
+  
+  .tp-slider-title-3 {
+    font-size: 2.5rem !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .tp-slider-title-3 span {
+    font-size: 2.5rem !important;
+  }
+  
+  .tp-slider-content-3 p {
+    font-size: 16px !important;
+    margin: 0 auto 20px auto !important;
+    padding: 0 10px !important;
+  }
+  
+  .tp-slider-btn-3 {
+    flex-direction: row !important;
+    gap: 12px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .tp-btn {
+    padding: 6px 16px !important;
+    font-size: 14px !important;
+    min-width: 90px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .tp-slider-area {
+    margin-top: 60px !important;
+  }
+  
+  .tp-slider-item-3 {
+    height: 45vh !important;
+    min-height: 45vh !important;
+  }
+  
+  .tp-slider-title-3 {
+    font-size: 2rem !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .tp-slider-title-3 span {
+    font-size: 2rem !important;
+  }
+  
+  .tp-slider-content-3 p {
+    font-size: 14px !important;
+    margin: 0 auto 15px auto !important;
+  }
+  
+  .tp-btn {
+    padding: 8px 25px !important;
+    font-size: 13px !important;
+    min-width: 100px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .tp-slider-area {
+    position: relative !important;
+    top: -60px !important;
+    padding-top: 60px !important;
+  }
+  
+  .tp-slider-item-3 {
+    height: 55vh !important;
+    min-height: 55vh !important;
+  }
+  
+  .tp-slider-btn-3 {
+    flex-direction: row !important;
+    gap: 10px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  
+  .tp-btn {
+    padding: 5px 14px !important;
+    font-size: 13px !important;
+    min-width: 80px !important;
+  }
+}
+
+/* Menu Section Mobile Styles */
+@media (max-width: 768px) {
+  .container-fluid {
+    padding: 20px 15px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  
+  .tp-section-title-wrapper-3 {
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .tp-section-title-3 {
+    font-size: 2rem !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .tp-section-title-wrapper-3 p {
+    font-size: 14px !important;
+    padding: 0 10px !important;
+  }
+  
+  .tp-menu-filter-buttons {
+    gap: 10px !important;
+  }
+  
+  .tp-menu-filter-btn {
+    padding: 6px 20px !important;
+    font-size: 14px !important;
+    min-width: 120px !important;
+  }
+  
+  .row {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  
+  .row > div {
+    width: 100% !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .addons-container {
+    padding: 15px !important;
+  }
+  
+  .addons-scroll {
+    gap: 12px !important;
+    padding-bottom: 12px !important;
+  }
+  
+  .addon-card {
+    min-width: 250px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .tp-section-title-3 {
+    font-size: 1.5rem !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .tp-section-title-wrapper-3 p {
+    font-size: 13px !important;
+  }
+  
+  .tp-menu-filter-btn {
+    padding: 5px 15px !important;
+    font-size: 13px !important;
+    min-width: 100px !important;
+  }
+  
+  .addon-card {
+    min-width: 220px !important;
+  }
+}
+
+/* Best Selling Thalis Mobile Styles */
+@media (max-width: 768px) {
+  .tp-product-area {
+    padding-top: 30px !important;
+    padding-bottom: 30px !important;
+  }
+  
+  .tp-section-title-wrapper-3 {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin-bottom: 20px !important;
+  }
+  
+  .tp-section-title-3 {
+    font-size: 2rem !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .tp-section-title-wrapper-3 p {
+    font-size: 14px !important;
+    padding: 0 10px !important;
+  }
+  
+  .row {
+    gap: 8px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    flex-direction: column !important;
+  }
+  
+  .row > div {
+    width: 100% !important;
+    margin-bottom: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .tp-section-title-3 {
+    font-size: 1.5rem !important;
+    margin-bottom: 8px !important;
+  }
+  
+  .tp-section-title-wrapper-3 p {
+    font-size: 13px !important;
+  }
+}
+
+/* Footer Mobile Styles */
+@media (max-width: 768px) {
+  footer {
+    margin-top: 15px !important;
+  }
+  
+  .container {
+    padding-top: 20px !important;
+    padding-bottom: 15px !important;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  
+  .col-xl-3, .col-xl-2, .col-xl-4 {
+    margin-bottom: 20px !important;
+    text-align: center !important;
+  }
+  
+  .footer-company-info {
+    text-align: center !important;
+  }
+  
+  .footer-logo {
+    justify-content: center !important;
+  }
+  
+  .footer-logo > div {
+    height: 100px !important;
+  }
+  
+  .footer-logo img {
+    height: 60px !important;
+  }
+  
+  .footer-company-info p {
+    font-size: 13px !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .footer-social {
+    justify-content: center !important;
+    gap: 10px !important;
+  }
+  
+  .footer-links h4, .footer-policies h4, .footer-contact h4 {
+    font-size: 16px !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .contact-items {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+  }
+  
+  .contact-items > div {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    margin-bottom: 12px !important;
+  }
+  
+  .contact-items .emoji {
+    margin-right: 0 !important;
+    margin-bottom: 5px !important;
+    font-size: 18px !important;
+  }
+  
+  .contact-items p {
+    font-size: 13px !important;
+  }
+  
+  .contact-items .location p {
+    max-width: 280px !important;
+  }
+  
+  .bottom-section {
+    padding: 10px 0 !important;
+  }
+  
+  .bottom-section .container {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  
+  .col-md-6 {
+    text-align: center !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .col-md-6 p {
+    font-size: 13px !important;
+  }
+}
+
+/* Product Cards Mobile Styles */
+@media (max-width: 1200px) {
+  .product-grid .row > div {
+    width: calc(25% - 7.5px) !important;
+  }
+}
+
+@media (max-width: 992px) {
+  .product-grid .row > div {
+    width: calc(33.333% - 6.67px) !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid .row {
+    flex-direction: column !important;
+    gap: 8px !important;
+  }
+  
+  .product-grid .row > div {
+    width: 100% !important;
+    margin-bottom: 20px !important;
+  }
+}
+
+/* General Mobile Improvements */
+@media (max-width: 768px) {
+  .container-fluid {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+  }
+  
+  .row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+  
+  .col-xl-12, .col-lg-12, .col-md-12, .col-sm-12 {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (max-width: 768px) {
+  button, .tp-btn {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  .tp-header-action-btn {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  .tp-menu-filter-btn {
+    min-height: 44px !important;
+  }
+}
+
+/* Smooth scrolling for mobile */
+@media (max-width: 768px) {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* Hide checkout sections on cart page */
+.tp-cart-area {
+  .tp-checkout-verify-item,
+  .tp-checkout-verify-reveal {
+    display: none !important;
+  }
+}
+
+/* Remove extra white space between header and content */
+header {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.tp-header-area {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.tp-header-bottom-3 {
+  margin: 0 !important;
+}
+
+/* Remove default margins from main content sections */
+.tp-login-area,
+.tp-checkout-area,
+.tp-slider-area,
+.tp-banner-area,
+.tp-cart-area {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Remove margins from breadcrumb sections */
+.tp-breadcrumb-area {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
+/* Remove extra spacing from specific page sections */
+.tp-login-area {
+  margin-top: 0 !important;
+  padding-top: 20px !important;
+}
+
+.tp-checkout-area {
+  margin-top: 0 !important;
+  padding-top: 20px !important;
+}
+
+.breadcrumb__area {
+  margin-top: 0 !important;
+  padding-top: 20px !important;
+}

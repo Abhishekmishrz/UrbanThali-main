@@ -81,11 +81,11 @@ const handleCloseCartMini = () => {
               <Link 
                 href="/cart" 
                 onClick={handleCloseCartMini} 
-                className="tp-btn mb-10 w-100"
+                className="tp-btn tp-btn-border mb-10 w-100"
                 style={{
-                  backgroundColor: '#FCB53B', // Golden Orange theme color
-                  color: 'white',
-                  border: 'none',
+                  backgroundColor: 'transparent',
+                  color: '#FCB53B',
+                  border: '2px solid #FCB53B',
                   padding: '10px 20px',
                   borderRadius: '6px',
                   textDecoration: 'none',
@@ -95,8 +95,14 @@ const handleCloseCartMini = () => {
                   display: 'block',
                   transition: 'all 0.3s ease'
                 }}
-                onMouseOver={(e) => e.target.style.backgroundColor = '#B45253'} // Deep Red hover
-                onMouseOut={(e) => e.target.style.backgroundColor = '#FCB53B'} // Golden Orange
+                onMouseOver={(e) => {
+                  e.target.style.backgroundColor = '#FCB53B';
+                  e.target.style.color = 'white';
+                }}
+                onMouseOut={(e) => {
+                  e.target.style.backgroundColor = 'transparent';
+                  e.target.style.color = '#FCB53B';
+                }}
               > 
                 view cart
               </Link>

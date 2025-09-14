@@ -32,15 +32,15 @@ const CartCheckout = () => {
         <div className="tp-cart-checkout-shipping-option-wrapper">
           <div className="tp-cart-checkout-shipping-option">
             <input id="flat_rate" type="radio" name="shipping" />
-            <label htmlFor="flat_rate" onClick={()=> handleShippingCost(20)}>
+            {/* <label htmlFor="flat_rate" onClick={()=> handleShippingCost(20)}>
               Flat rate: <span style={{color: '#FCB53B'}}>₹20.00</span>
-            </label>
+            </label> */}
           </div>
           <div className="tp-cart-checkout-shipping-option">
             <input id="local_pickup" type="radio" name="shipping" />
-            <label htmlFor="local_pickup" onClick={()=> handleShippingCost(25)}>
+            {/* <label htmlFor="local_pickup" onClick={()=> handleShippingCost(25)}>
               Local pickup: <span style={{color: '#FCB53B'}}>₹25.00</span>
-            </label>
+            </label> */}
           </div>
           <div className="tp-cart-checkout-shipping-option">
             <input id="free_shipping" type="radio" name="shipping" />
@@ -68,19 +68,8 @@ const CartCheckout = () => {
             fontWeight: '600',
             textAlign: 'center',
             display: 'block',
-            transition: 'all 0.3s ease',
             cursor: hasThaliInCart ? 'pointer' : 'not-allowed',
             opacity: hasThaliInCart ? 1 : 0.6
-          }}
-          onMouseOver={(e) => {
-            if (hasThaliInCart) {
-              e.target.style.backgroundColor = '#B45253';
-            }
-          }}
-          onMouseOut={(e) => {
-            if (hasThaliInCart) {
-              e.target.style.backgroundColor = '#FCB53B';
-            }
           }}
         >
           {hasThaliInCart ? 'Proceed to Checkout' : 'Add Thali First'}

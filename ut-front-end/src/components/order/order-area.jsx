@@ -2,7 +2,6 @@
 import React, { useRef } from "react";
 import Image from "next/image";
 import dayjs from "dayjs";
-import ReactToPrint from "react-to-print";
 // internal
 import logo from "@assets/img/logo/logo.svg";
 import ErrorMsg from "@/components/common/error-msg";
@@ -11,8 +10,299 @@ import PrdDetailsLoader from "@/components/loader/prd-details-loader";
 
 
 const OrderArea = ({ orderId }) => {
-  const printRef = useRef();
+  const printRef = useRef(null);
   const { data: order, isError, isLoading } = useGetUserOrderByIdQuery(orderId);
+  
+  // Manual print handler
+  const handlePrint = () => {
+    const printContent = printRef.current;
+    if (!printContent) {
+      console.error("Print content not found");
+      return;
+    }
+    
+    // Clone the content to modify for printing
+    const clonedContent = printContent.cloneNode(true);
+    
+    // Create a new window for printing
+    const printWindow = window.open('', '_blank', 'width=800,height=600');
+    if (!printWindow) {
+      // Fallback to window.print if popup blocked
+      window.print();
+      return;
+    }
+    
+    // Build the complete styled document
+    const printDocument = `
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Invoice ${order?.order?.invoice || ''}</title>
+          <style>
+            * {
+              margin: 0;
+              padding: 0;
+              box-sizing: border-box;
+            }
+            
+            body { 
+              font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+              color: #333;
+              line-height: 1.6;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+            
+            /* Container and layout */
+            .invoice-wrapper {
+              max-width: 800px;
+              margin: 0 auto;
+              padding: 40px;
+              background-color: #f5f5f5;
+            }
+            
+            /* Header section */
+            .invoice-header {
+              border-bottom: 2px solid #fff;
+              padding-bottom: 20px;
+              margin-bottom: 40px;
+            }
+            
+            .invoice-header-content {
+              display: flex;
+              justify-content: space-between;
+              align-items: flex-end;
+            }
+            
+            .invoice-logo img {
+              height: 60px;
+              width: auto;
+            }
+            
+            .invoice-logo p {
+              margin-top: 10px;
+              font-size: 12px;
+              color: #666;
+              max-width: 300px;
+            }
+            
+            .invoice-title {
+              text-align: right;
+            }
+            
+            .invoice-title h1 {
+              font-size: 48px;
+              text-transform: uppercase;
+              color: #333;
+              margin: 0;
+              font-weight: 300;
+              letter-spacing: 2px;
+            }
+            
+            /* Customer details */
+            .customer-section {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 30px;
+            }
+            
+            .customer-details h4 {
+              font-size: 18px;
+              margin-bottom: 10px;
+              text-transform: uppercase;
+              color: #333;
+            }
+            
+            .customer-details p {
+              margin: 2px 0;
+              font-size: 14px;
+              color: #555;
+            }
+            
+            .invoice-details {
+              text-align: right;
+            }
+            
+            .invoice-details p {
+              margin: 2px 0;
+              font-size: 14px;
+            }
+            
+            .invoice-details strong {
+              color: #333;
+            }
+            
+            /* Table */
+            .order-table {
+              background: white;
+              padding: 30px 40px;
+              margin-bottom: 30px;
+              border-radius: 4px;
+            }
+            
+            table {
+              width: 100%;
+              border-collapse: collapse;
+            }
+            
+            thead {
+              background-color: #f8f9fa;
+            }
+            
+            thead th {
+              padding: 12px;
+              text-align: left;
+              font-size: 14px;
+              font-weight: 600;
+              color: #333;
+              border-bottom: 2px solid #dee2e6;
+            }
+            
+            tbody td {
+              padding: 12px;
+              font-size: 14px;
+              color: #555;
+              border-bottom: 1px solid #e9ecef;
+            }
+            
+            /* Total section */
+            .total-section {
+              background-color: #d4edda;
+              padding: 30px 40px;
+              border-radius: 4px;
+              display: flex;
+              justify-content: space-between;
+            }
+            
+            .total-item {
+              flex: 1;
+            }
+            
+            .total-item h5 {
+              font-size: 14px;
+              margin-bottom: 5px;
+              color: #333;
+              font-weight: 600;
+            }
+            
+            .total-item p {
+              font-size: 16px;
+              color: #155724;
+              font-weight: 500;
+              margin: 0;
+            }
+            
+            .total-item:last-child p {
+              color: #dc3545;
+              font-size: 18px;
+              font-weight: 700;
+            }
+            
+            /* Print specific */
+            @media print {
+              body {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+              }
+              
+              .invoice-wrapper {
+                padding: 20px;
+              }
+              
+              @page {
+                size: A4;
+                margin: 10mm;
+              }
+            }
+          </style>
+        </head>
+        <body>
+          <div class="invoice-wrapper">
+            <div class="invoice-header">
+              <div class="invoice-header-content">
+                <div class="invoice-logo">
+                  <img src="/assets/img/logo/urban-thali-logo.png" alt="Urban Thali" style="height: 60px; width: auto;" />
+                  <p>GROUND FLOOR, SHOP NO. 6, A Wing, JUHU TAJ, 6, NS Mankikar Rd, nr. HSBC BANK, JVPD Scheme, Vile Parle West, Mumbai, Maharashtra 400049</p>
+                </div>
+                <div class="invoice-title">
+                  <h1>Invoice</h1>
+                </div>
+              </div>
+            </div>
+            
+            <div class="customer-section">
+              <div class="customer-details">
+                <h4>${order?.order?.name || 'Customer'}</h4>
+                <p>${order?.order?.country || ''}</p>
+                <p>${order?.order?.city || ''}</p>
+                <p>${order?.order?.contact || ''}</p>
+              </div>
+              <div class="invoice-details">
+                <p><strong>Invoice ID:</strong> #${order?.order?.invoice || ''}</p>
+                <p><strong>Date:</strong> ${order?.order?.createdAt ? dayjs(order.order.createdAt).format("MMMM D, YYYY") : ''}</p>
+              </div>
+            </div>
+            
+            <div class="order-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>SL</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Item Price</th>
+                    <th>Amount</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  ${order?.order?.cart?.map((item, i) => `
+                    <tr>
+                      <td>${i + 1}</td>
+                      <td>${item.title}</td>
+                      <td>${item.orderQuantity}</td>
+                      <td>₹${item.price}</td>
+                      <td>₹${(item.price * item.orderQuantity).toFixed(2)}</td>
+                    </tr>
+                  `).join('') || ''}
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="total-section">
+              <div class="total-item">
+                <h5>Payment Method</h5>
+                <p>${order?.order?.paymentMethod || 'N/A'}</p>
+              </div>
+              <div class="total-item">
+                <h5>Shipping Cost</h5>
+                <p>₹${order?.order?.shippingCost || 0}</p>
+              </div>
+              <div class="total-item">
+                <h5>Discount</h5>
+                <p>₹${order?.order?.discount?.toFixed(2) || '0.00'}</p>
+              </div>
+              <div class="total-item">
+                <h5>Total Amount</h5>
+                <p>₹${order?.order?.totalAmount ? parseInt(order.order.totalAmount).toFixed(2) : '0.00'}</p>
+              </div>
+            </div>
+          </div>
+        </body>
+      </html>
+    `;
+    
+    printWindow.document.write(printDocument);
+    printWindow.document.close();
+    
+    // Wait for content to load then print
+    printWindow.onload = () => {
+      setTimeout(() => {
+        printWindow.print();
+        printWindow.close();
+      }, 500);
+    };
+  };
+  
   let content = null;
   if (isLoading) {
     content = <PrdDetailsLoader loading={isLoading}/>
@@ -24,6 +314,147 @@ const OrderArea = ({ orderId }) => {
     const { name, country, city, contact, invoice, createdAt, cart, shippingCost, discount, totalAmount, paymentMethod, status} = order.order;
     content = (
       <>
+        <style jsx global>{`
+          @media print {
+            /* Hide everything except invoice */
+            body * {
+              visibility: hidden;
+            }
+            .tp-invoice-print-wrapper,
+            .tp-invoice-print-wrapper * {
+              visibility: visible;
+            }
+            .tp-invoice-print-wrapper {
+              position: absolute;
+              left: 0;
+              top: 0;
+              width: 100%;
+              background: white;
+            }
+            
+            /* Hide print button during print */
+            .invoice__print {
+              display: none !important;
+            }
+            
+            /* Preserve invoice styling */
+            .grey-bg-2 {
+              background-color: #f5f5f5 !important;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+            
+            .bg-white {
+              background-color: white !important;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+            
+            .alert-success {
+              background-color: #d4edda !important;
+              border-color: #c3e6cb !important;
+              color: #155724 !important;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+            
+            .bg-success {
+              background-color: #28a745 !important;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+            
+            .bg-warning {
+              background-color: #FCB53B !important;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+            
+            .bg-danger {
+              background-color: #dc3545 !important;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+            
+            .text-danger {
+              color: #dc3545 !important;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+            
+            .text-uppercase {
+              text-transform: uppercase !important;
+            }
+            
+            .table-light {
+              background-color: #f8f9fa !important;
+              -webkit-print-color-adjust: exact;
+              print-color-adjust: exact;
+            }
+            
+            .border-bottom {
+              border-bottom: 2px solid #dee2e6 !important;
+            }
+            
+            .border-white {
+              border-color: white !important;
+            }
+            
+            /* Preserve padding and margins */
+            .pt-40 { padding-top: 40px !important; }
+            .pb-40 { padding-bottom: 40px !important; }
+            .pl-40 { padding-left: 40px !important; }
+            .pr-40 { padding-right: 40px !important; }
+            .pt-30 { padding-top: 30px !important; }
+            .pb-30 { padding-bottom: 30px !important; }
+            .pt-20 { padding-top: 20px !important; }
+            .pb-20 { padding-bottom: 20px !important; }
+            .pt-10 { padding-top: 10px !important; }
+            .pb-10 { padding-bottom: 10px !important; }
+            .mb-40 { margin-bottom: 40px !important; }
+            .mb-30 { margin-bottom: 30px !important; }
+            .mb-20 { margin-bottom: 20px !important; }
+            .mb-10 { margin-bottom: 10px !important; }
+            .mb-0 { margin-bottom: 0 !important; }
+            
+            /* Font sizes */
+            .font-70 {
+              font-size: 70px !important;
+            }
+            
+            /* Table styles */
+            .table {
+              width: 100% !important;
+              border-collapse: collapse !important;
+            }
+            
+            .table thead th {
+              padding: 10px !important;
+              text-align: left !important;
+              font-weight: bold !important;
+            }
+            
+            .table tbody td {
+              padding: 10px !important;
+              border-top: 1px solid #dee2e6 !important;
+            }
+            
+            /* Ensure text alignment */
+            .text-end {
+              text-align: right !important;
+            }
+            
+            .text-md-end {
+              text-align: right !important;
+            }
+            
+            /* Page settings */
+            @page {
+              margin: 20mm;
+              size: A4;
+            }
+          }
+        `}</style>
         <section className="invoice__area pt-120 pb-120">
           <div className="container">
             <div className="invoice__msg-wrapper">
@@ -147,21 +578,16 @@ const OrderArea = ({ orderId }) => {
             <div className="invoice__print text-end mt-3">
               <div className="row">
                 <div className="col-xl-12">
-                  <ReactToPrint
-                    trigger={() => (
-                      <button
-                        type="button"
-                        className="tp-invoice-print tp-btn tp-btn-black"
-                      >
-                        <span className="mr-5">
-                          <i className="fa-regular fa-print"></i>
-                        </span>{" "}
-                        Print
-                      </button>
-                    )}
-                    content={() => printRef.current}
-                    documentTitle="Invoice"
-                  />
+                  <button
+                    type="button"
+                    className="tp-invoice-print tp-btn tp-btn-black"
+                    onClick={handlePrint}
+                  >
+                    <span className="mr-5">
+                      <i className="fa-regular fa-print"></i>
+                    </span>{" "}
+                    Print
+                  </button>
                 </div>
               </div>
             </div>

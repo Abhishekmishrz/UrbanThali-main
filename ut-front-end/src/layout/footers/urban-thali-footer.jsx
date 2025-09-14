@@ -5,14 +5,33 @@ import Image from 'next/image';
 
 const UrbanThaliFooter = () => {
   return (
-    <footer style={{ backgroundColor: '#FFF9E6', color: '#1f2937', marginTop: '30px' }}>
-      <div className="container" style={{ paddingTop: '50px', paddingBottom: '30px', maxWidth: '1200px' }}>
+    <footer style={{ 
+      backgroundColor: '#FFF9E6', 
+      color: '#1f2937', 
+      marginTop: '20px'
+    }}>
+      <div className="container" style={{ 
+        paddingTop: '30px', 
+        paddingBottom: '20px', 
+        maxWidth: '1200px'
+      }}>
         <div className="row">
           {/* Column 1: Company Information */}
-          <div className="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-4" style={{ paddingLeft: '0px', marginLeft: '0px' }}>
-            <div className="footer-company-info" style={{ paddingLeft: '0px', marginLeft: '0px' }}>
+          <div className="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-4" style={{ 
+            paddingLeft: '0px', 
+            marginLeft: '0px'
+          }}>
+            <div className="footer-company-info" style={{ 
+              paddingLeft: '0px', 
+              marginLeft: '0px'
+            }}>
               {/* Logo */}
-              <div className="footer-logo" style={{ display: 'flex', alignItems: 'flex-start', margin: '0px', padding: '0px' }}>
+              <div className="footer-logo" style={{ 
+                display: 'flex', 
+                alignItems: 'flex-start', 
+                margin: '0px', 
+                padding: '0px'
+              }}>
                 <div style={{
                   height: '120px',
                   display: 'flex',
@@ -50,7 +69,10 @@ const UrbanThaliFooter = () => {
               </p>
               
               {/* Social Media Icons */}
-              <div className="footer-social" style={{ display: 'flex', gap: '12px' }}>
+              <div className="footer-social" style={{ 
+                display: 'flex', 
+                gap: '12px'
+              }}>
                 {/* Facebook */}
                 <a 
                   href="https://www.facebook.com/urbanthalioffical/" 
@@ -98,8 +120,8 @@ const UrbanThaliFooter = () => {
                     transition: 'all 0.3s ease'
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.backgroundColor = '#E4405F';
-                    e.target.style.borderColor = '#E4405F';
+                    e.target.style.backgroundColor = '#FCB53B';
+                    e.target.style.borderColor = '##FCB53B';
                   }}
                   onMouseOut={(e) => {
                     e.target.style.backgroundColor = 'transparent';
@@ -127,8 +149,8 @@ const UrbanThaliFooter = () => {
                     transition: 'all 0.3s ease'
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.backgroundColor = '#FF0000';
-                    e.target.style.borderColor = '#FF0000';
+                    e.target.style.backgroundColor = '#FCB53B';
+                    e.target.style.borderColor = '#FCB53B';
                   }}
                   onMouseOut={(e) => {
                     e.target.style.backgroundColor = 'transparent';
@@ -171,7 +193,12 @@ const UrbanThaliFooter = () => {
           </div>
 
           {/* Column 2: Quick Links */}
-          <div className="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-4">
+          <div className="col-xl-2 col-lg-2 col-md-6 col-sm-12 mb-4" style={{
+            '@media (max-width: 768px)': {
+              marginBottom: '20px',
+              textAlign: 'center'
+            }
+          }}>
             <div className="footer-links">
               <h4 style={{ 
                 color: '#1f2937', 
@@ -228,7 +255,12 @@ const UrbanThaliFooter = () => {
           </div>
 
           {/* Column 3: Policies */}
-          <div className="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-4">
+          <div className="col-xl-3 col-lg-3 col-md-6 col-sm-12 mb-4" style={{
+            '@media (max-width: 768px)': {
+              marginBottom: '20px',
+              textAlign: 'center'
+            }
+          }}>
             <div className="footer-policies">
               <h4 style={{ 
                 color: '#1f2937', 
@@ -285,7 +317,12 @@ const UrbanThaliFooter = () => {
           </div>
 
           {/* Column 4: Contact Info */}
-          <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4">
+          <div className="col-xl-4 col-lg-4 col-md-6 col-sm-12 mb-4" style={{
+            '@media (max-width: 768px)': {
+              marginBottom: '20px',
+              textAlign: 'center'
+            }
+          }}>
             <div className="footer-contact">
               <h4 style={{ 
                 color: '#1f2937', 
@@ -296,9 +333,19 @@ const UrbanThaliFooter = () => {
               }}>
                 Contact Info
               </h4>
-              <div className="contact-items">
+              <div className="contact-items" style={{
+                '@media (max-width: 768px)': {
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center'
+                }
+              }}>
                 {/* Location */}
-                <div style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '16px' }}>
+                <div style={{ 
+                  display: 'flex', 
+                  alignItems: 'flex-start', 
+                  marginBottom: '16px'
+                }}>
                   <div style={{ 
                     color: '#FCB53B', 
                     marginRight: '12px', 
@@ -318,7 +365,11 @@ const UrbanThaliFooter = () => {
                 </div>
 
                 {/* Phone */}
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+                <div style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  marginBottom: '16px'
+                }}>
                   <div style={{ 
                     color: '#FCB53B', 
                     marginRight: '12px',
@@ -336,7 +387,11 @@ const UrbanThaliFooter = () => {
                 </div>
 
                 {/* Email */}
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '16px' }}>
+                <div style={{ 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  marginBottom: '16px'
+                }}>
                   <div style={{ 
                     color: '#FCB53B', 
                     marginRight: '12px',
@@ -361,12 +416,19 @@ const UrbanThaliFooter = () => {
       {/* Bottom Section */}
       <div style={{ 
         borderTop: '1px solid #e5e7eb',
-        padding: '20px 0',
+        padding: '15px 0',
         backgroundColor: '#FFF9E6'
       }}>
-        <div className="container" style={{ maxWidth: '1200px' }}>
+        <div className="container" style={{ 
+          maxWidth: '1200px'
+        }}>
           <div className="row align-items-center">
-            <div className="col-md-6">
+            <div className="col-md-6" style={{
+              '@media (max-width: 768px)': {
+                textAlign: 'center',
+                marginBottom: '10px'
+              }
+            }}>
               <p style={{ 
                 color: '#94a3b8', 
                 fontSize: '14px', 
@@ -375,13 +437,17 @@ const UrbanThaliFooter = () => {
                 © 2025 Urban Thali. All rights reserved.
               </p>
             </div>
-            <div className="col-md-6 text-md-end">
+            <div className="col-md-6 text-md-end" style={{
+              '@media (max-width: 768px)': {
+                textAlign: 'center'
+              }
+            }}>
               <p style={{ 
                 color: '#94a3b8', 
                 fontSize: '14px', 
                 margin: 0
               }}>
-                Made with <span style={{ color: '#ff69b4' }}>❤️</span> for food lovers everywhere
+                Made with <span style={{ color: '#ff69b4' }}>❤️</span> from <a href="https://nktech.in/"> NKTech</a>
               </p>
             </div>
           </div>

@@ -11,7 +11,7 @@ export const metadata = {
 export default function LoginPage() {
   return (
     <Wrapper>
-      <HeaderThree hideNavbar={true} />
+      <HeaderThree />
       <CommonBreadcrumb title="Login" subtitle="Login" center={true} />
       <LoginArea/>
       <UrbanThaliFooter />

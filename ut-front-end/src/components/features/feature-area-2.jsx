@@ -11,7 +11,7 @@ export const feature_data = [
       </svg>
     ),
     title: 'Healthy Ingredients',
-    subtitle: 'We use only the freshest, highest quality vegetables and ingredients sourced daily from trusted local markets'
+    subtitle: 'We use only the freshest, highest quality vegetables and ingredients sourced daily'
   },
   {
     icon: (

@@ -30,8 +30,30 @@ const CompareArea = () => {
               {compareItems.length === 0 && (
                 <div className="text-center pt-50">
                   <h3>No Compare Items Found</h3>
-                  <Link href="/shop" className="tp-cart-checkout-btn mt-20">
-                    Continue Shipping
+                  <Link 
+                    href="/shop" 
+                    className="tp-cart-checkout-btn mt-20"
+                    style={{
+                      backgroundColor: '#FCB53B',
+                      color: 'white',
+                      border: 'none',
+                      padding: '12px 24px',
+                      borderRadius: '6px',
+                      textDecoration: 'none',
+                      fontSize: '16px',
+                      fontWeight: '600',
+                      textAlign: 'center',
+                      display: 'inline-block',
+                      transition: 'all 0.3s ease'
+                    }}
+                    onMouseOver={(e) => {
+                      e.target.style.backgroundColor = '#B45253';
+                    }}
+                    onMouseOut={(e) => {
+                      e.target.style.backgroundColor = '#FCB53B';
+                    }}
+                  >
+                    Continue Shopping
                   </Link>
                 </div>
               )}

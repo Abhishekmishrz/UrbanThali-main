@@ -12,7 +12,7 @@ export default function MenuPage() {
   return (
     <Wrapper>
       <HeaderThree />
-      <div style={{ paddingTop: '100px' }}>
+      <div style={{ paddingTop: '135px' }}>
         <MenuFilterArea />
       </div>
       <UrbanThaliFooter />

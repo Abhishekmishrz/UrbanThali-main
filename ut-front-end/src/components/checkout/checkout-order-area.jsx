@@ -45,7 +45,7 @@ const CheckoutOrderArea = ({ checkoutData }) => {
           ))}
 
           {/*  shipping */}
-          <li className="tp-order-info-list-shipping">
+          {/* <li className="tp-order-info-list-shipping">
             <span>Shipping</span>
             <div className="tp-order-info-list-shipping-item d-flex flex-column align-items-end">
               <span>
@@ -83,7 +83,7 @@ const CheckoutOrderArea = ({ checkoutData }) => {
                 <ErrorMsg msg={errors?.shippingOption?.message} />
               </span>
             </div>
-          </li>
+          </li> */}
 
            {/*  subtotal */}
            <li className="tp-order-info-list-subtotal">
@@ -121,9 +121,9 @@ const CheckoutOrderArea = ({ checkoutData }) => {
             name="payment"
             value="Card"
           />
-          <label onClick={() => setShowCard(true)} htmlFor="back_transfer" data-bs-toggle="direct-bank-transfer">
+          {/* <label onClick={() => setShowCard(true)} htmlFor="back_transfer" data-bs-toggle="direct-bank-transfer">
             Credit Card
-          </label>
+          </label> */}
           {showCard && (
             <div className="direct-bank-transfer">
               <div className="payment_card">
@@ -169,6 +169,22 @@ const CheckoutOrderArea = ({ checkoutData }) => {
           type="submit"
           disabled={!stripe || isCheckoutSubmit}
           className="tp-checkout-btn w-100"
+          style={{
+            backgroundColor: (!stripe || isCheckoutSubmit) ? '#6b7280' : '#FCB53B',
+            color: 'white',
+            border: 'none',
+            padding: '12px 24px',
+            borderRadius: '6px',
+            fontSize: '16px',
+            fontWeight: '600',
+            textAlign: 'center',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            width: '100%',
+            cursor: (!stripe || isCheckoutSubmit) ? 'not-allowed' : 'pointer',
+            opacity: (!stripe || isCheckoutSubmit) ? 0.6 : 1
+          }}
         >
           Place Order
         </button>

@@ -56,11 +56,13 @@ export default function HomePageThree() {
   return (
     <Wrapper>
       <HeaderThree />
-      <BeautyBanner />
-      <BestSellingThalis />
-      <MenuFilterArea />
-      <SpecialOffers />
-      <FeatureAreaTwo />
+      <div style={{ paddingTop: '95px' }}>
+        <BeautyBanner />
+        <BestSellingThalis />
+        <MenuFilterArea />
+        <SpecialOffers />
+        <FeatureAreaTwo />
+      </div>
       <UrbanThaliFooter />
     </Wrapper>
   );
