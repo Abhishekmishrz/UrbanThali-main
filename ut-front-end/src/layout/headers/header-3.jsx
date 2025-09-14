@@ -49,33 +49,28 @@ const HeaderThree = ({ fixed = true, hideNavbar = false }) => {
         <div id="header-sticky" className={`tp-header-area tp-header-style-transparent-white tp-header-transparent tp-header-sticky has-dark-logo tp-header-height ${sticky ? 'header-sticky' : ''}`} style={{
           ...headerStyles,
           margin: 0,
-          padding: '0 20px'
+          padding: 0
         }}>
           <div className="tp-header-bottom-3" style={{ 
-            padding: '10px 0', 
+            padding: '10px 20px', 
             minHeight: '60px', 
             display: 'flex', 
             alignItems: 'center',
             justifyContent: 'space-between',
-            width: '100%',
-            maxWidth: '100%',
-            margin: '0',
-            position: 'relative'
+            maxWidth: '1200px',
+            margin: '0 auto'
           }}>
             {/* Logo */}
             <div className="logo" style={{ 
               display: 'flex', 
               alignItems: 'center',
               flex: '0 0 auto',
-              minWidth: '150px',
-              marginLeft: '20px'
+              minWidth: '150px'
             }}>
               <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
                 <Image 
                   src="/assets/img/logo/urban-thali-logo.png" 
                   alt="Urban Thali Logo" 
-                  width={200}
-                  height={80}
                   style={{ 
                     height: 'auto', 
                     width: '100%', 
@@ -102,13 +97,12 @@ const HeaderThree = ({ fixed = true, hideNavbar = false }) => {
               </div>
             </div>
             
-            {/* Action Buttons - Right aligned */}
+            {/* Action Buttons */}
             <div className="tp-header-action d-flex align-items-center" style={{ 
-              gap: '15px', 
+              gap: '8px', 
               flex: '0 0 auto',
-              minWidth: '150px',
-              justifyContent: 'flex-end',
-              marginLeft: 'auto'
+              minWidth: '100px',
+              justifyContent: 'flex-end'
             }}>
               {/* Cart - Always visible */}
               <div className="tp-header-action-item" style={{ display: 'flex', alignItems: 'center' }}>
