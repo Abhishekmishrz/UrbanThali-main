@@ -29,7 +29,8 @@ const MenuFilterArea = () => {
       description: item.description || '',
       category: 'thali',
       cuisine: 'Indian, Thali, Traditional',
-      available: item.available
+      available: item.available,
+      quantity: item.quantity || 100  // Add quantity field from API or default to 100
     }));
 
     const apiAddOns = addOnItems.map(item => ({
@@ -44,7 +45,8 @@ const MenuFilterArea = () => {
       description: item.description || '',
       category: 'addons',
       cuisine: 'Add-ons, Extras',
-      available: item.available
+      available: item.available,
+      quantity: item.quantity || 100  // Add quantity field from API or default to 100
     }));
 
     // Only return API data - no fallback
@@ -60,8 +62,20 @@ const MenuFilterArea = () => {
     setActiveFilter(filter);
   };
 
+  // Helper function to check if item is a thali
+  const isThaliItem = (item) => {
+    const categoryName = typeof item.category === 'string' 
+      ? item.category 
+      : item.category?.name;
+    
+    return categoryName === 'Thali' || 
+           categoryName === 'thali' ||
+           item.parent === 'Thali' ||
+           item.productType === 'thali';
+  };
+  
   // Check if there are any thali items in cart
-  const hasThaliInCart = cart_products.some(item => item.category === 'thali' || item.category?.name === 'Thali');
+  const hasThaliInCart = cart_products.some(item => isThaliItem(item));
 
   const handleAddToCart = (item) => {
     // Create cart item with required properties

@@ -20,12 +20,13 @@ const ThaliDetailsContent = ({ thali }) => {
       orderQuantity: quantity
     };
     dispatch(add_cart_product(productToAdd));
-    showSuccess(`${quantity} ${thali.title} added to cart!`);
+    // Toast notification is handled by the cart slice
   };
 
   const handleQuantityChange = (change) => {
     const newQuantity = quantity + change;
-    if (newQuantity >= 1 && newQuantity <= 50) {
+    const maxQuantity = thali.quantity || 50; // Use available quantity or default to 50
+    if (newQuantity >= 1 && newQuantity <= maxQuantity) {
       setQuantity(newQuantity);
     }
   };

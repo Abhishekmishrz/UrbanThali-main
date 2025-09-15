@@ -21,7 +21,7 @@ const ThaliDetailsArea = ({ id }) => {
       price: apiData.price,
       image: apiData.img || apiData.imageURLs?.[0]?.img,
       description: apiData.description,
-      category: apiData.category?.name,
+      category: apiData.category || { name: 'Thali' },  // Keep category as object
       cuisine: apiData.cuisine,
       status: apiData.status === "available" ? "in-stock" : "out-of-stock",
       quantity: apiData.quantity,

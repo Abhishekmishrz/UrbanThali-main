@@ -11,7 +11,23 @@ import AddOnsSection from './add-ons-section';
 
 const CartArea = () => {
   const { cart_products } = useSelector((state) => state.cart);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  
+  // Helper function to check if item is a thali
+  const isThaliItem = (item) => {
+    const categoryName = typeof item.category === 'string' 
+      ? item.category 
+      : item.category?.name;
+    
+    return categoryName === 'Thali' || 
+           categoryName === 'thali' ||
+           item.parent === 'Thali' ||
+           item.productType === 'thali';
+  };
+  
+  // Check if there's at least one thali in cart
+  const hasThaliInCart = cart_products.some(item => isThaliItem(item));
+  
   return (
     <>
       <section className="tp-cart-area pb-120">
@@ -92,8 +108,8 @@ const CartArea = () => {
                   </div>
                 </div>
                 
-                {/* Add-ons Section */}
-                <AddOnsSection />
+                {/* Add-ons Section - Only show when there's a thali in cart */}
+                {hasThaliInCart && <AddOnsSection />}
               </div>
               <div className="col-xl-3 col-lg-4 col-md-6">
                 <CartCheckout />

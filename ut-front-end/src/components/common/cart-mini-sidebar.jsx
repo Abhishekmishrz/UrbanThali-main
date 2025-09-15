@@ -14,13 +14,20 @@ const CartMiniSidebar = () => {
   const { total } = useCartInfo();
   const dispatch = useDispatch();
   
+  // Helper function to check if item is a thali
+  const isThaliItem = (item) => {
+    const categoryName = typeof item.category === 'string' 
+      ? item.category 
+      : item.category?.name;
+    
+    return categoryName === 'Thali' || 
+           categoryName === 'thali' ||
+           item.parent === 'Thali' ||
+           item.productType === 'thali';
+  };
+  
   // Check if there's at least one thali in cart
-  const hasThaliInCart = cart_products.some(item => 
-    item.category?.name === 'Thali' || 
-    item.category === 'thali' ||  // Check for string category
-    item.parent === 'Thali' ||
-    item.productType === 'thali'
-  );
+  const hasThaliInCart = cart_products.some(item => isThaliItem(item));
 
   // handle remove product
   const handleRemovePrd = (prd) => {
