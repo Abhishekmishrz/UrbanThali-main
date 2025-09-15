@@ -56,7 +56,7 @@ export default function HomePageThree() {
   return (
     <Wrapper>
       <HeaderThree />
-      <div style={{ paddingTop: '95px' }}>
+      <div>
         <BeautyBanner />
         <BestSellingThalis />
         <MenuFilterArea />
