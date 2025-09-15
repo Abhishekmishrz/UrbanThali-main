@@ -38,12 +38,9 @@ exports.addAllFoodItemService = async (data) => {
 exports.getAllFoodItemsService = async () => {
   console.log('Service: Querying database...');
   
-  // Since Mongoose query has issues, use raw collection query which works correctly
-  const rawItems = await FoodItem.collection.find({}).toArray();
-  console.log('Service: Raw collection returned', rawItems.length, 'items');
-  
-  // Convert raw items to Mongoose documents for consistency
-  const foodItems = rawItems.map(item => new FoodItem(item));
+  // Use proper Mongoose query method that works in production
+  const foodItems = await FoodItem.find({}).populate('restaurant').populate('category');
+  console.log('Service: Database returned', foodItems.length, 'items');
   
   // Count by category
   const thaliCount = foodItems.filter(item => item.category?.name === 'Thali').length;

@@ -70,7 +70,9 @@ const HeaderThree = ({ fixed = true, hideNavbar = false }) => {
               <Link href="/" style={{ display: 'flex', alignItems: 'center' }}>
                 <Image 
                   src="/assets/img/logo/urban-thali-logo.png" 
-                  alt="Urban Thali Logo" 
+                  alt="Urban Thali Logo"
+                  width={200}
+                  height={55}
                   style={{ 
                     height: 'auto', 
                     width: '100%', 
