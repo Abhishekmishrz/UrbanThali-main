@@ -1,0 +1,167 @@
+[
+  {
+    "img": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop",
+    "name": "Mini Urban Thali",
+    "slug": "mini-urban-thali",
+    "unit": "plate",
+    "imageURLs": [
+      {
+        "img": "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop"
+      }
+    ],
+    "parent": "Thali",
+    "children": "Mini Thali",
+    "price": 139,
+    "discount": 0,
+    "quantity": 100,
+    "restaurant": {
+      "name": "Urban Thali"
+    },
+    "category": {
+      "name": "Thali"
+    },
+    "status": "available",
+    "foodType": "veg",
+    "description": "2 Veg Curries (Dal + Seasonal Veg), Steamed Rice / 4 Roti, Salad + Pickle",
+    "ingredients": ["Dal", "Seasonal Vegetables", "Steamed Rice or 4 Roti", "Salad", "Pickle"],
+    "preparationTime": 20,
+    "spiceLevel": "medium",
+    "thaliType": "mini",
+    "tags": ["affordable", "quick", "complete-meal"],
+    "featured": true,
+    "sellCount": 85,
+    "available": true
+  },
+  {
+    "img": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop",
+    "name": "Everyday Thali",
+    "slug": "everyday-thali",
+    "unit": "plate",
+    "imageURLs": [
+      {
+        "img": "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=400&h=300&fit=crop"
+      }
+    ],
+    "parent": "Thali",
+    "children": "Regular Thali",
+    "price": 169,
+    "discount": 0,
+    "quantity": 80,
+    "restaurant": {
+      "name": "Urban Thali"
+    },
+    "category": {
+      "name": "Thali"
+    },
+    "status": "available",
+    "foodType": "veg",
+    "description": "2 Veg Curries (Dal + Seasonal Veg), 4 Roti + Steamed Rice, Salad + Pickle + Papad",
+    "ingredients": ["Dal", "Seasonal Vegetables", "4 Roti", "Steamed Rice", "Salad", "Pickle", "Papad"],
+    "preparationTime": 25,
+    "spiceLevel": "medium",
+    "thaliType": "regular",
+    "tags": ["daily-meal", "balanced", "value"],
+    "featured": true,
+    "sellCount": 120,
+    "available": true
+  },
+  {
+    "img": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop",
+    "name": "Urban Premium Thali",
+    "slug": "urban-premium-thali",
+    "unit": "plate",
+    "imageURLs": [
+      {
+        "img": "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=400&h=300&fit=crop"
+      }
+    ],
+    "parent": "Thali",
+    "children": "Premium Thali",
+    "price": 199,
+    "discount": 0,
+    "quantity": 60,
+    "restaurant": {
+      "name": "Urban Thali"
+    },
+    "category": {
+      "name": "Thali"
+    },
+    "status": "available",
+    "foodType": "veg",
+    "description": "2 Veg Curries (Dal + Paneer/Seasonal Veg), 4 Roti / 2 Parathas + Steamed Rice, Curd + Salad + Papad + Sweet",
+    "ingredients": ["Dal", "Paneer or Seasonal Veg", "4 Roti or 2 Parathas", "Steamed Rice", "Curd", "Salad", "Papad", "Sweet"],
+    "preparationTime": 30,
+    "spiceLevel": "medium",
+    "thaliType": "regular",
+    "tags": ["premium", "complete-meal", "sweet-included"],
+    "featured": true,
+    "sellCount": 95,
+    "available": true
+  },
+  {
+    "img": "https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=400&h=300&fit=crop",
+    "name": "Urban Feast Thali",
+    "slug": "urban-feast-thali",
+    "unit": "plate",
+    "imageURLs": [
+      {
+        "img": "https://images.unsplash.com/photo-1506280754576-f6fa8a873550?w=400&h=300&fit=crop"
+      }
+    ],
+    "parent": "Thali",
+    "children": "Large Thali",
+    "price": 249,
+    "discount": 0,
+    "quantity": 50,
+    "restaurant": {
+      "name": "Urban Thali"
+    },
+    "category": {
+      "name": "Thali"
+    },
+    "status": "available",
+    "foodType": "veg",
+    "description": "3 Veg Curries (Dal + Paneer + Seasonal Veg), 4 Roti / 2 parathas + Jeera Rice, Salad + Papad + Pickle + Sweet",
+    "ingredients": ["Dal", "Paneer", "Seasonal Vegetables", "4 Roti or 2 Parathas", "Jeera Rice", "Salad", "Papad", "Pickle", "Sweet"],
+    "preparationTime": 35,
+    "spiceLevel": "medium",
+    "thaliType": "large",
+    "tags": ["feast", "variety", "filling"],
+    "featured": true,
+    "sellCount": 75,
+    "available": true
+  },
+  {
+    "img": "https://images.unsplash.com/photo-1609501676725-7186f017a4b7?w=400&h=300&fit=crop",
+    "name": "Maharaja Urban Thali",
+    "slug": "maharaja-urban-thali",
+    "unit": "plate",
+    "imageURLs": [
+      {
+        "img": "https://images.unsplash.com/photo-1609501676725-7186f017a4b7?w=400&h=300&fit=crop"
+      }
+    ],
+    "parent": "Thali",
+    "children": "Premium Thali",
+    "price": 299,
+    "discount": 0,
+    "quantity": 40,
+    "restaurant": {
+      "name": "Urban Thali"
+    },
+    "category": {
+      "name": "Thali"
+    },
+    "status": "available",
+    "foodType": "veg",
+    "description": "4 Veg Curries (Dal + Paneer + Chhole/Rajma + Seasonal Veg), 4 Roti / 2 Naan / 2 parathas + Pulao /Jeera Rice, Raita + Salad + Papad + 2 Sweets",
+    "ingredients": ["Dal", "Paneer", "Chhole or Rajma", "Seasonal Vegetables", "4 Roti or 2 Naan or 2 Parathas", "Pulao or Jeera Rice", "Raita", "Salad", "Papad", "2 Sweets"],
+    "preparationTime": 40,
+    "spiceLevel": "medium",
+    "thaliType": "large",
+    "tags": ["royal", "luxury", "special-occasion"],
+    "featured": true,
+    "sellCount": 65,
+    "available": true
+  }
+]

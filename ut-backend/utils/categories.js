@@ -1,235 +1,193 @@
 const categories = [
   {
     _id: "641d424bdbfab7b02ab28b95",
-    img: "https://i.ibb.co/sVxYFDY/product-cat-1.png",
-    parent: "Headphones",
+    img: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop",
+    parent: "Thali",
     children: [
-      "Kids Headphones",
-      "Bluetooth Headphones",
-      "On-Ear Headphones"
+      "Veg Thali",
+      "Non-Veg Thali",
+      "Regional Thali",
+      "Mini Thali",
+      "Premium Thali",
+      "Family Thali",
+      "Special Diet Thali"
     ],
-    productType: "electronics",
-    products: [
-      "641e887d05f9ee1717e1348a",
-      "641e887d05f9ee1717e1348f",
-      "641e887d05f9ee1717e13496"
-    ],
+    foodType: "mixed",
+    productType: "thali",
+    products: [],
     status: "Show"
   },
   {
     _id: "6419723bd7dc5155c04350d4",
-    img: "https://i.ibb.co/xHFpQTV/product-cat-2.png",
-    parent: "Mobile Tablets",
+    img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop",
+    parent: "Add-ons",
     children: [
-      "Samsung",
-      "Apple"
+      "Beverages",
+      "Desserts",
+      "Extra Breads",
+      "Extra Curries",
+      "Salads",
+      "Snacks"
     ],
-    productType: "electronics",
-    products: [
-      "641e887d05f9ee1717e1349a",
-      "641e887d05f9ee1717e1349f",
-      "641d4106dbfab7b02ab28b22"
-    ],
+    foodType: "mixed",
+    productType: "addon",
+    products: [],
     status: "Show"
   },
   {
     _id: "6419723bd7dc5155c04350d5",
-    img: "https://i.ibb.co/S0GjZdp/product-cat-3.png",
-    parent: "CPU Heat Pipes",
+    img: "https://images.unsplash.com/photo-1609501676725-7186f017a4b7?w=400&h=300&fit=crop",
+    parent: "Special Thali",
     children: [
-      "CPU Cooler",
-      "Air CPU Cooler"
+      "Festival Special",
+      "Weekend Special",
+      "Seasonal Special",
+      "Chef's Special"
     ],
-    productType: "electronics",
-    products: [
-      "641e887d05f9ee1717e134ad",
-      "641e887d05f9ee1717e134b2"
-    ],
+    foodType: "mixed",
+    productType: "thali",
+    products: [],
     status: "Show"
   },
   {
     _id: "6419723bd7dc5155c04350d6",
-    img: "https://i.ibb.co/g3YK8H2/product-cat-4.png",
-    parent: "Smart Watch",
+    img: "https://images.unsplash.com/photo-1574484284002-952d92456975?w=400&h=300&fit=crop",
+    parent: "Regional Cuisine",
     children: [
-      "Sports Smart Watch",
-      "Apple Watch",
-      "Fitness Smart Watch"
+      "North Indian",
+      "South Indian",
+      "East Indian",
+      "West Indian",
+      "Northeast Indian"
     ],
-    productType: "electronics",
-    products: [
-      "641e887d05f9ee1717e134b7",
-      "641e887d05f9ee1717e134c0",
-      "641e887d05f9ee1717e134c6"
-    ],
+    foodType: "mixed",
+    productType: "thali",
+    products: [],
     status: "Show"
   },
   {
     _id: "6419723bd7dc5155c04350d7",
-    img: "https://i.ibb.co/D9qfYWX/product-cat-5.png",
-    parent: "Bluetooth",
+    img: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&h=300&fit=crop",
+    parent: "Diet Special",
     children: [
-      "Wireless Bluetooth",
-      "Sports Bluetooth"
+      "Vegan",
+      "Jain",
+      "Keto",
+      "Gluten Free",
+      "Low Calorie",
+      "High Protein"
     ],
-    productType: "electronics",
-    products: [
-      "641e887d05f9ee1717e134cb",
-      "641e887d05f9ee1717e134cf"
-    ],
+    foodType: "mixed",
+    productType: "thali",
+    products: [],
     status: "Show"
   },
   {
     _id: "64200cb921162f8b15beae3e",
-    img: "https://i.ibb.co/ZWfqMXs/fashion-cat-1.jpg",
-    parent: "Clothing",
+    img: "https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=400&h=300&fit=crop",
+    parent: "Kids Menu",
     children: [
-      "Men's",
-      "Women's",
-      "Baby"
+      "Kids Mini Thali",
+      "Kids Special",
+      "Kids Combo"
     ],
-    productType: "fashion",
-    products: [
-      "6421258288fba3e101965dc3",
-      "64215fb702240f90b1138e14",
-      "6421650a02240f90b1138e1e",
-      "642287e951820d9c45c9127c",
-      "64228862253d81bc860d2092"
-    ],
+    foodType: "mixed",
+    productType: "thali",
+    products: [],
     status: "Show"
   },
   {
     _id: "64200cef21162f8b15beae40",
-    img: "https://i.ibb.co/GsDLfnh/fashion-cat-2.jpg",
-    parent: "Bags",
+    img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop",
+    parent: "Beverages",
     children: [
-      "HandBag",
-      "Traveling Bag"
+      "Lassi",
+      "Chaas",
+      "Fresh Juice",
+      "Soft Drinks",
+      "Tea & Coffee",
+      "Traditional Drinks"
     ],
-    productType: "fashion",
-    products: [
-      "642168b402240f90b1138e86",
-      "64216b0902240f90b1138e8e"
-    ],
+    foodType: "mixed",
+    productType: "addon",
+    products: [],
     status: "Show"
   },
   {
     _id: "64200d2421162f8b15beae42",
-    img: "https://i.ibb.co/H2NsVHm/fashion-cat-3.jpg",
-    parent: "Shoes",
+    img: "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
+    parent: "Desserts",
     children: [
-      "Men's",
-      "Women's"
+      "Traditional Sweets",
+      "Ice Creams",
+      "Cakes & Pastries",
+      "Indian Desserts"
     ],
-    productType: "fashion",
-    products: [
-      "64216e2f02240f90b1138e96",
-      "6421700802240f90b1138e9e"
-    ],
+    foodType: "mixed",
+    productType: "addon",
+    products: [],
     status: "Show"
   },
   {
     _id: "64240b66253d81bc860d4cf2",
-    img: "https://i.ibb.co/7yg7yg9/beauty-category-1.jpg",
-    parent: "Discover Skincare",
+    img: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop",
+    parent: "Breads",
     children: [
-      "Makeup Brush",
-      "Face Powder"
+      "Roti",
+      "Naan",
+      "Paratha",
+      "Kulcha",
+      "Bhatura"
     ],
-    productType: "beauty",
-    products: [
-      "64250d8e253d81bc860d4d26",
-      "6426a68a253d81bc860d5ea6"
-    ],
+    foodType: "mixed",
+    productType: "addon",
+    products: [],
     status: "Show"
   },
   {
     _id: "64240ca8253d81bc860d4cf4",
-    img: "https://i.ibb.co/8YdfXmn/beauty-category-2.jpg",
-    parent: "Beauty of Skin",
+    img: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=400&h=300&fit=crop",
+    parent: "Rice Varieties",
     children: [
-      "Skin",
-      "Lip Liner"
+      "Plain Rice",
+      "Jeera Rice",
+      "Biryani",
+      "Pulao",
+      "Fried Rice"
     ],
-    productType: "beauty",
-    products: [
-      "642515c0253d81bc860d4da3",
-      "6426ab33253d81bc860d5f86"
-    ],
+    foodType: "mixed",
+    productType: "addon",
+    products: [],
     status: "Show"
   },
   {
     _id: "64240e13253d81bc860d4cf6",
-    img: "https://i.ibb.co/1dZNNGh/beauty-category-3.jpg",
-    parent: "Awesome Lip Care",
+    img: "https://images.unsplash.com/photo-1545247181-516773cae754?w=400&h=300&fit=crop",
+    parent: "Curries",
     children: [
-      "Cosmetics",
-      "Cream"
+      "Veg Curries",
+      "Non-Veg Curries",
+      "Dal Varieties",
+      "Paneer Dishes"
     ],
-    productType: "beauty",
-    products: [
-      "64251bc0253d81bc860d4db5",
-      "6426adba253d81bc860d6132"
-    ],
+    foodType: "mixed",
+    productType: "addon",
+    products: [],
     status: "Show"
   },
   {
     _id: "64240fb4253d81bc860d4cf8",
-    img: "https://i.ibb.co/nkQK0Xr/beauty-category-4.jpg",
-    parent: "Facial Care",
+    img: "https://images.unsplash.com/photo-1609501676725-7186f017a4b7?w=400&h=300&fit=crop",
+    parent: "Combo Meals",
     children: [
-      "Powder",
-      "Makeup Brush"
+      "Lunch Combo",
+      "Dinner Combo",
+      "Family Combo",
+      "Party Pack"
     ],
-    productType: "beauty",
-    products: [
-      "64252172253d81bc860d4dbe",
-      "6426b217253d81bc860d6217"
-    ],
-    status: "Show"
-  },
-  {
-    _id: "64312cd3e2c1bd22cebb2129",
-    parent: "Bracelets",
-    children: [
-      "Gold",
-      "Silver"
-    ],
-    productType: "jewelry",
-    products: [
-      "6431364df5a812bd37e765ac",
-      "6431418c5e1d915c39ada44b",
-      "643249b49814bb139594c454"
-    ],
-    status: "Show"
-  },
-  {
-    _id: "64312cf0e2c1bd22cebb212b",
-    parent: "Earrings",
-    children: [
-      "Gold",
-      "Silver"
-    ],
-    productType: "jewelry",
-    products: [
-      "64313abdf5a812bd37e765bc",
-      "64323fd99814bb139594c443",
-      "64324f0c9814bb139594c47c"
-    ],
-    status: "Show"
-  },
-  {
-    _id: "64312d00e2c1bd22cebb212d",
-    parent: "Necklaces",
-    children: [
-      "Gold",
-      "Silver"
-    ],
-    productType: "jewelry",
-    products: [
-      "64313e92f5a812bd37e765cf",
-      "6432433c9814bb139594c44c"
-    ],
+    foodType: "mixed",
+    productType: "thali",
+    products: [],
     status: "Show"
   }
 ]

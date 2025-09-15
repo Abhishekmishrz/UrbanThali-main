@@ -1,0 +1,103 @@
+[
+  {
+    "name": "Extra Roti",
+    "slug": "extra-roti",
+    "price": 15,
+    "unit": "piece",
+    "category": "Bread",
+    "description": "Freshly made wheat roti",
+    "available": true,
+    "foodType": "veg"
+  },
+  {
+    "name": "Jeera Rice",
+    "slug": "jeera-rice",
+    "price": 30,
+    "unit": "bowl",
+    "category": "Rice",
+    "description": "Aromatic cumin flavored basmati rice",
+    "available": true,
+    "foodType": "veg"
+  },
+  {
+    "name": "Masala Papad",
+    "slug": "masala-papad",
+    "price": 25,
+    "unit": "plate",
+    "category": "Starter",
+    "description": "Crispy papad topped with onions, tomatoes and spices",
+    "available": true,
+    "foodType": "veg"
+  },
+  {
+    "name": "Curd",
+    "slug": "curd",
+    "price": 25,
+    "unit": "100ml",
+    "category": "Dairy",
+    "description": "Fresh homemade curd",
+    "available": true,
+    "foodType": "veg"
+  },
+  {
+    "name": "Masala Chhach",
+    "slug": "masala-chhach",
+    "price": 35,
+    "unit": "glass",
+    "category": "Beverage",
+    "description": "Spiced buttermilk with herbs",
+    "available": true,
+    "foodType": "veg"
+  },
+  {
+    "name": "Shikanji Bottle",
+    "slug": "shikanji-bottle",
+    "price": 15,
+    "unit": "bottle",
+    "category": "Beverage",
+    "description": "Refreshing lemon drink with spices",
+    "available": true,
+    "foodType": "veg"
+  },
+  {
+    "name": "Gulab Jamun",
+    "slug": "gulab-jamun",
+    "price": 45,
+    "unit": "2pcs",
+    "category": "Dessert",
+    "description": "Soft milk solid dumplings in sugar syrup",
+    "available": true,
+    "foodType": "veg"
+  },
+  {
+    "name": "Green Salad",
+    "slug": "green-salad",
+    "price": 30,
+    "unit": "plate",
+    "category": "Salad",
+    "description": "Fresh cucumber, tomato, onion and carrot salad",
+    "available": true,
+    "foodType": "veg"
+  },
+  {
+    "name": "Paneer Curry (Extra)",
+    "slug": "paneer-curry-extra",
+    "price": 50,
+    "unit": "bowl",
+    "category": "Curry",
+    "description": "Extra serving of rich paneer curry",
+    "available": true,
+    "foodType": "veg"
+  },
+  {
+    "name": "Cold Drink",
+    "slug": "cold-drink",
+    "price": 0,
+    "unit": "200ml",
+    "category": "Beverage",
+    "description": "Soft drinks available at MRP",
+    "available": true,
+    "foodType": "veg",
+    "note": "Price as per MRP"
+  }
+]
