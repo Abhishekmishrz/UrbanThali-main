@@ -52,13 +52,12 @@ const HeaderThree = ({ fixed = true, hideNavbar = false }) => {
           padding: 0
         }}>
           <div className="tp-header-bottom-3" style={{ 
-            padding: '10px 20px', 
+            padding: '10px 40px', 
             minHeight: '60px', 
             display: 'flex', 
             alignItems: 'center',
             justifyContent: 'space-between',
-            maxWidth: '1200px',
-            margin: '0 auto'
+            width: '100%'
           }}>
             {/* Logo */}
             <div className="logo" style={{ 
@@ -101,9 +100,8 @@ const HeaderThree = ({ fixed = true, hideNavbar = false }) => {
             
             {/* Action Buttons */}
             <div className="tp-header-action d-flex align-items-center" style={{ 
-              gap: '8px', 
+              gap: '15px', 
               flex: '0 0 auto',
-              minWidth: '100px',
               justifyContent: 'flex-end'
             }}>
               {/* Cart - Always visible */}
@@ -155,7 +153,7 @@ const HeaderThree = ({ fixed = true, hideNavbar = false }) => {
               </div>
               
               {/* User dropdown - Hidden on mobile */}
-              <div className="tp-header-action-item d-none d-sm-block" style={{ display: 'flex', alignItems: 'center' }}>
+              <div className="tp-header-action-item d-none d-sm-block" >
                 <UserDropdown />
               </div>
               
