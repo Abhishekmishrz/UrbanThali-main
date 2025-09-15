@@ -20,7 +20,9 @@ const BestSellingThalis = () => {
       id: product._id,
       title: product.name,
       image: product.img,
-      category: product.category?.name || 'thali',
+      category: product.category || { name: 'Thali' },  // Keep category as object
+      parent: 'Thali',  // Explicitly set parent as Thali
+      productType: 'thali',  // Explicitly set productType
       quantity: product.quantity || 100  // Use API quantity or default to 100
     };
     dispatch(add_cart_product(cartProduct));

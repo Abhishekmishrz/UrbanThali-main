@@ -21,6 +21,25 @@ export const cartSlice = createSlice({
         img: payload.img || payload.image
       };
       
+      // Check if the item being added is an add-on
+      const isAddOn = normalizedPayload.category?.name === 'Add-ons' || 
+                      normalizedPayload.parent === 'Add-ons' ||
+                      normalizedPayload.productType === 'addon';
+      
+      // If it's an add-on, check if there's a thali in the cart
+      if (isAddOn) {
+        const hasThaliInCart = state.cart_products.some(item => 
+          item.category?.name === 'Thali' || 
+          item.parent === 'Thali' ||
+          item.productType === 'thali'
+        );
+        
+        if (!hasThaliInCart) {
+          notifyError("Please add a thali to your cart before adding add-ons");
+          return;
+        }
+      }
+      
       const isExist = state.cart_products.some((i) => i._id === normalizedPayload._id);
       if (!isExist) {
         const newItem = {
@@ -75,11 +94,52 @@ export const cartSlice = createSlice({
     },
     remove_product: (state, { payload }) => {
       const itemId = payload.id || payload._id;
-      state.cart_products = state.cart_products.filter(
-        (item) => item._id !== itemId
-      );
+      
+      // Check if the item being removed is a thali
+      const isThali = payload.category?.name === 'Thali' || 
+                     payload.parent === 'Thali' ||
+                     payload.productType === 'thali';
+      
+      // If removing a thali, check if there are add-ons in cart
+      if (isThali) {
+        const addOnsInCart = state.cart_products.filter(item => 
+          item.category?.name === 'Add-ons' || 
+          item.parent === 'Add-ons' ||
+          item.productType === 'addon'
+        );
+        
+        // Check if this is the last thali
+        const remainingThalis = state.cart_products.filter(item => 
+          item._id !== itemId && (
+            item.category?.name === 'Thali' || 
+            item.parent === 'Thali' ||
+            item.productType === 'thali'
+          )
+        );
+        
+        // If this is the last thali and there are add-ons, remove add-ons too
+        if (remainingThalis.length === 0 && addOnsInCart.length > 0) {
+          state.cart_products = state.cart_products.filter(
+            (item) => item._id !== itemId && 
+                     item.category?.name !== 'Add-ons' && 
+                     item.parent !== 'Add-ons' &&
+                     item.productType !== 'addon'
+          );
+          notifyError(`${payload.title} and all add-ons removed from cart (add-ons require a thali)`);
+        } else {
+          state.cart_products = state.cart_products.filter(
+            (item) => item._id !== itemId
+          );
+          notifyError(`${payload.title} Remove from cart`);
+        }
+      } else {
+        state.cart_products = state.cart_products.filter(
+          (item) => item._id !== itemId
+        );
+        notifyError(`${payload.title} Remove from cart`);
+      }
+      
       setLocalStorage("cart_products", state.cart_products);
-      notifyError(`${payload.title} Remove from cart`);
     },
     get_cart_products: (state, action) => {
       state.cart_products = getLocalStorage("cart_products");

@@ -15,7 +15,11 @@ const CartMiniSidebar = () => {
   const dispatch = useDispatch();
   
   // Check if there's at least one thali in cart
-  const hasThaliInCart = cart_products.some(item => item.category === 'thali');
+  const hasThaliInCart = cart_products.some(item => 
+    item.category?.name === 'Thali' || 
+    item.parent === 'Thali' ||
+    item.productType === 'thali'
+  );
 
   // handle remove product
   const handleRemovePrd = (prd) => {

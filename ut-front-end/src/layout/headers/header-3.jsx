@@ -125,30 +125,33 @@ const HeaderThree = ({ fixed = true, hideNavbar = false }) => {
                     minHeight: '36px'
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.backgroundColor = '#f8f9fa';
+                    e.currentTarget.style.backgroundColor = '#f8f9fa';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.backgroundColor = 'transparent';
                   }}
                 >
                   <CartTwo />
-                  <span className="tp-header-action-badge" style={{
-                    position: 'absolute',
-                    top: '-1px',
-                    right: '-1px',
-                    backgroundColor: '#FCB53B',
-                    color: 'white',
-                    borderRadius: '50%',
-                    width: '16px',
-                    height: '16px',
-                    fontSize: '10px',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontWeight: 'bold'
-                  }}>
-                    {quantity}
-                  </span>
+                  {quantity > 0 && (
+                    <span className="tp-header-action-badge" style={{
+                      position: 'absolute',
+                      top: '-1px',
+                      right: '-1px',
+                      backgroundColor: '#FCB53B',
+                      color: 'white',
+                      borderRadius: '50%',
+                      width: '18px',
+                      height: '18px',
+                      fontSize: '11px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontWeight: 'bold',
+                      pointerEvents: 'none'
+                    }}>
+                      {quantity}
+                    </span>
+                  )}
                 </button>
               </div>
               
@@ -177,10 +180,10 @@ const HeaderThree = ({ fixed = true, hideNavbar = false }) => {
                     minHeight: '36px'
                   }}
                   onMouseOver={(e) => {
-                    e.target.style.backgroundColor = '#f8f9fa';
+                    e.currentTarget.style.backgroundColor = '#f8f9fa';
                   }}
                   onMouseOut={(e) => {
-                    e.target.style.backgroundColor = 'transparent';
+                    e.currentTarget.style.backgroundColor = 'transparent';
                   }}
                 >
                   <Menu />
