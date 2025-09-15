@@ -17,6 +17,7 @@ const CartMiniSidebar = () => {
   // Check if there's at least one thali in cart
   const hasThaliInCart = cart_products.some(item => 
     item.category?.name === 'Thali' || 
+    item.category === 'thali' ||  // Check for string category
     item.parent === 'Thali' ||
     item.productType === 'thali'
   );

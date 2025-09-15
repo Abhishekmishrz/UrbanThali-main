@@ -23,6 +23,7 @@ export const cartSlice = createSlice({
       
       // Check if the item being added is an add-on
       const isAddOn = normalizedPayload.category?.name === 'Add-ons' || 
+                      normalizedPayload.category === 'addons' ||  // Check for string category
                       normalizedPayload.parent === 'Add-ons' ||
                       normalizedPayload.productType === 'addon';
       
@@ -30,6 +31,7 @@ export const cartSlice = createSlice({
       if (isAddOn) {
         const hasThaliInCart = state.cart_products.some(item => 
           item.category?.name === 'Thali' || 
+          item.category === 'thali' ||  // Check for string category
           item.parent === 'Thali' ||
           item.productType === 'thali'
         );
@@ -97,6 +99,7 @@ export const cartSlice = createSlice({
       
       // Check if the item being removed is a thali
       const isThali = payload.category?.name === 'Thali' || 
+                     payload.category === 'thali' ||  // Check for string category
                      payload.parent === 'Thali' ||
                      payload.productType === 'thali';
       
@@ -104,6 +107,7 @@ export const cartSlice = createSlice({
       if (isThali) {
         const addOnsInCart = state.cart_products.filter(item => 
           item.category?.name === 'Add-ons' || 
+          item.category === 'addons' ||  // Check for string category
           item.parent === 'Add-ons' ||
           item.productType === 'addon'
         );
@@ -112,6 +116,7 @@ export const cartSlice = createSlice({
         const remainingThalis = state.cart_products.filter(item => 
           item._id !== itemId && (
             item.category?.name === 'Thali' || 
+            item.category === 'thali' ||  // Check for string category
             item.parent === 'Thali' ||
             item.productType === 'thali'
           )
@@ -122,6 +127,7 @@ export const cartSlice = createSlice({
           state.cart_products = state.cart_products.filter(
             (item) => item._id !== itemId && 
                      item.category?.name !== 'Add-ons' && 
+                     item.category !== 'addons' &&  // Check for string category
                      item.parent !== 'Add-ons' &&
                      item.productType !== 'addon'
           );
