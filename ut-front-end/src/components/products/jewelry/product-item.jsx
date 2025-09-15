@@ -3,18 +3,15 @@ import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 // internal
-import { AddCart, Cart, QuickView, Wishlist } from "@/svg";
+import { AddCart, Cart, QuickView } from "@/svg";
 import { handleProductModal } from "@/redux/features/productModalSlice";
 import { add_cart_product } from "@/redux/features/cartSlice";
-import { add_to_wishlist } from "@/redux/features/wishlist-slice";
 import { getCollectionImageById } from "@/utils/imageUtils";
 
 const ProductItem = ({ product }) => {
   const { _id, img, title, price, tags,status } = product || {};
   const { cart_products } = useSelector((state) => state.cart);
-  const { wishlist } = useSelector((state) => state.wishlist);
   const isAddedToCart = cart_products.some((prd) => prd._id === _id);
-  const isAddedToWishlist = wishlist.some((prd) => prd._id === _id);
   const dispatch = useDispatch();
 
   // handle add product
@@ -22,10 +19,6 @@ const ProductItem = ({ product }) => {
     dispatch(add_cart_product(prd));
   };
 
-  // handle wishlist product
-  const handleWishlistProduct = (prd) => {
-    dispatch(add_to_wishlist(prd));
-  };
 
   return (
     <div className="tp-product-item-4 p-relative mb-40">
@@ -70,15 +63,6 @@ const ProductItem = ({ product }) => {
             >
               <QuickView />
               <span className="tp-product-tooltip">Quick View</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => handleWishlistProduct(product)}
-              className={`tp-product-action-btn-3 ${isAddedToWishlist ? 'active' : ''} tp-product-add-to-wishlist-btn`}
-              disabled={status === 'out-of-stock'}
-            >
-              <Wishlist />
-              <span className="tp-product-tooltip">Add To Wishlist</span>
             </button>
           </div>
         </div>

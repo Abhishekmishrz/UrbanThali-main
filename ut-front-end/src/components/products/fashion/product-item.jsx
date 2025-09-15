@@ -4,10 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Rating } from "react-simple-star-rating";
 import Link from "next/link";
 // internal
-import { Cart, CompareThree, QuickView, Wishlist } from "@/svg";
+import { Cart, CompareThree, QuickView } from "@/svg";
 import { handleProductModal } from "@/redux/features/productModalSlice";
 import { add_cart_product } from "@/redux/features/cartSlice";
-import { add_to_wishlist } from "@/redux/features/wishlist-slice";
 import { add_to_compare } from "@/redux/features/compareSlice";
 import { getCollectionImageById } from "@/utils/imageUtils";
 
@@ -15,9 +14,7 @@ const ProductItem = ({ product, style_2 = false }) => {
   const { _id, img, category, title, reviews, price, discount, tags, status } = product || {};
   const [ratingVal, setRatingVal] = useState(0);
   const { cart_products } = useSelector((state) => state.cart);
-  const { wishlist } = useSelector((state) => state.wishlist);
   const isAddedToCart = cart_products.some((prd) => prd._id === _id);
-  const isAddedToWishlist = wishlist.some((prd) => prd._id === _id);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -34,10 +31,6 @@ const ProductItem = ({ product, style_2 = false }) => {
   // handle add product
   const handleAddProduct = (prd) => {
     dispatch(add_cart_product(prd));
-  };
-  // handle wishlist product
-  const handleWishlistProduct = (prd) => {
-    dispatch(add_to_wishlist(prd));
   };
 
   // handle compare product
@@ -93,12 +86,6 @@ const ProductItem = ({ product, style_2 = false }) => {
               <QuickView />
               <span className="tp-product-tooltip tp-product-tooltip-right">
                 Quick View
-              </span>
-            </button>
-            <button disabled={status === 'out-of-stock'} onClick={() => handleWishlistProduct(product)} className={`tp-product-action-btn-2 ${isAddedToWishlist ? 'active' : ''} tp-product-add-to-wishlist-btn`}>
-              <Wishlist />
-              <span className="tp-product-tooltip tp-product-tooltip-right">
-                Add To Wishlist
               </span>
             </button>
             <button disabled={status === 'out-of-stock'} onClick={() => handleCompareProduct(product)} className="tp-product-action-btn-2 tp-product-add-to-compare-btn">
