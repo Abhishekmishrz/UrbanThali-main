@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 // internal
 import { Box, DeliveryTwo, Processing, Truck } from "@/svg";
 import { userLoggedOut } from "@/redux/features/auth/authSlice";
+import { notifySuccess } from "@/utils/toast";
 
 const NavProfileTab = ({ orderData }) => {
   const {user} = useSelector(state => state.auth)
@@ -13,6 +14,7 @@ const NavProfileTab = ({ orderData }) => {
   // handle logout
   const handleLogout = () => {
     dispatch(userLoggedOut());
+    notifySuccess('Logged out successfully');
     router.push('/')
   }
 

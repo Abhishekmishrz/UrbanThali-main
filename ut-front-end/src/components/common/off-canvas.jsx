@@ -8,6 +8,7 @@ import { CloseTwo } from '@/svg';
 // Logo path
 import MobileMenus from './mobile-menus';
 import { userLoggedOut } from '@/redux/features/auth/authSlice';
+import { notifySuccess } from '@/utils/toast';
 
 const OffCanvas = ({ isOffCanvasOpen, setIsCanvasOpen }) => {
   const { user } = useSelector((state) => state.auth);
@@ -16,6 +17,7 @@ const OffCanvas = ({ isOffCanvasOpen, setIsCanvasOpen }) => {
   
   const handleLogout = () => {
     dispatch(userLoggedOut());
+    notifySuccess('Logged out successfully');
     setIsCanvasOpen(false);
     router.push('/');
   };

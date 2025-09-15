@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/navigation';
 import { userLoggedOut } from '@/redux/features/auth/authSlice';
+import { notifySuccess } from '@/utils/toast';
 import { User } from '@/svg';
 
 const UserDropdown = () => {
@@ -28,6 +29,7 @@ const UserDropdown = () => {
 
   const handleLogout = () => {
     dispatch(userLoggedOut());
+    notifySuccess('Logged out successfully');
     router.push('/');
     setIsOpen(false);
   };
